@@ -7,6 +7,7 @@ import GLib from 'gi://GLib';
 import GnomeDesktop from 'gi://GnomeDesktop';
 import GObject from 'gi://GObject';
 import Pango from 'gi://Pango';
+import PangoCairo from 'gi://PangoCairo';
 import St from 'gi://St';
 
 import { Extension, gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
@@ -14,7 +15,12 @@ import * as Config from 'resource:///org/gnome/shell/misc/config.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as MessageTray from 'resource:///org/gnome/shell/ui/messageTray.js';
 
-import { getMonthFontSupport, getWeekdayFontSupport } from './lib/utils.js';
+import {
+    FONT_FILES,
+    getMonthFontSupport,
+    getWeekdayFontSupport,
+    registerBundledFonts,
+} from './lib/utils.js';
 
 //#region Constants
 // -- Base dimensions for 1080p ------------------------------------------------
@@ -62,8 +68,6 @@ const EN_MONTH_NAMES = { long: EN_MONTH_LONG, short: EN_MONTH_LONG.map(m => m.sl
 const HEX_RE = /^#([0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})$/i;
 const RGB_RE = /^rgba?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*(?:,\s*(\d*\.?\d+)\s*)?\)$/i;
 const FALLBACK_COLOR = 'rgba(255,255,255,1)'; // white
-// -- Font files ---------------------------------------------------------------
-const FONT_FILES = ['Anurati.otf', 'Poppins.ttf'];
 //#endregion
 
 //#region ClockLayout
@@ -148,7 +152,7 @@ export default class ModernClockExtension extends Extension {
 
         // -- Install fonts ----------------------------------------------------
         this._fontNotification = { source: null, notification: null };
-        this._installFonts(); // fonts will not be loaded on first run
+        this._installFonts();
         this._fontsSupport = {
             weekday: getWeekdayFontSupport(this._settings.get_string('weekday-font')),
             date: getMonthFontSupport(this._settings.get_string('date-font')),
@@ -578,34 +582,78 @@ export default class ModernClockExtension extends Extension {
     //#endregion
 
     //#region installFonts
+    // Makes the bundled fonts available. With Pango 1.56+ (GNOME 48+), they are loaded straight
+    // from the extension folder: they work right away and leave nothing behind on uninstall.
+    // Older versions get a copy in the user font folder, which only loads next session.
     _installFonts() {
-        const fontsDir = Gio.File.new_for_path(
+        const bundledDir = Gio.File.new_for_path(GLib.build_filenamev([this.path, 'fonts']));
+        const userDir = Gio.File.new_for_path(
             GLib.build_filenamev([GLib.get_user_data_dir(), 'fonts', 'modernclock'])
         );
 
-        const fontsPresent = () =>
-            fontsDir.query_exists(null) &&
-            FONT_FILES.every(fontName => fontsDir.get_child(fontName).query_exists(null));
-
-        if (fontsPresent()) return;
-
-        // prettier-ignore
-        this._logger.log(
-            `Modern Clock fonts missing, installing them at ${fontsDir.get_path()}. ` +
-            'Takes effect next session.'
-        );
         try {
-            const srcDir = Gio.File.new_for_path(GLib.build_filenamev([this.path, 'fonts']));
-            if (!fontsDir.query_exists(null)) fontsDir.make_directory_with_parents(null);
-            FONT_FILES.forEach(fontName => {
-                const srcChild = srcDir.get_child(fontName);
-                const destChild = fontsDir.get_child(fontName);
-                srcChild.copy(destChild, Gio.FileCopyFlags.OVERWRITE, null, null);
+            const fontMaps = [
+                global.stage.get_pango_context().get_font_map(), // draws the clock labels
+                PangoCairo.FontMap.get_default(), // used by the font support checks
+            ];
+            if (registerBundledFonts(bundledDir.get_path(), fontMaps)) {
+                this._removeCopiedFonts(userDir);
+                return;
+            }
+        } catch (e) {
+            this._logger.warn('failed to load the bundled fonts, copying them instead:', e);
+        }
+        this._copyFonts(bundledDir, userDir);
+    }
+    //#endregion
+
+    //#region copyFonts
+    _copyFonts(bundledDir, userDir) {
+        const checksum = file =>
+            GLib.compute_checksum_for_bytes(GLib.ChecksumType.SHA256, file.load_bytes(null)[0]);
+
+        try {
+            // Missing fonts, or outdated ones after an extension update
+            const outdated = Object.keys(FONT_FILES).filter(fileName => {
+                const copy = userDir.get_child(fileName);
+                return (
+                    !copy.query_exists(null) ||
+                    checksum(copy) !== checksum(bundledDir.get_child(fileName))
+                );
             });
+            if (outdated.length === 0) return;
+
+            // prettier-ignore
+            this._logger.log(
+                `Installing Modern Clock fonts at ${userDir.get_path()}: ${outdated.join(', ')}. ` +
+                'Takes effect next session.'
+            );
+            if (!userDir.query_exists(null)) userDir.make_directory_with_parents(null);
+            outdated.forEach(fileName =>
+                bundledDir
+                    .get_child(fileName)
+                    .copy(userDir.get_child(fileName), Gio.FileCopyFlags.OVERWRITE, null, null)
+            );
             this._notifyFontsInstalled();
         } catch (e) {
             this._logger.warn('failed to install fonts:', e);
         }
+    }
+    //#endregion
+
+    //#region removeCopiedFonts
+    // Removes the copies made on an older GNOME version, so they don't shadow the bundled fonts
+    // once they get outdated
+    _removeCopiedFonts(userDir) {
+        [...Object.keys(FONT_FILES).map(fileName => userDir.get_child(fileName)), userDir].forEach(
+            file => {
+                try {
+                    file.delete(null);
+                } catch {
+                    // missing, or the folder holds other files
+                }
+            }
+        );
     }
     //#endregion
 

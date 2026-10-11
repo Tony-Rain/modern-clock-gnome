@@ -5,6 +5,7 @@ import Adw from 'gi://Adw';
 import Gdk from 'gi://Gdk';
 import GLib from 'gi://GLib';
 import Gtk from 'gi://Gtk';
+import PangoCairo from 'gi://PangoCairo';
 
 import {
     ExtensionPreferences,
@@ -14,7 +15,7 @@ import * as Config from 'resource:///org/gnome/Shell/Extensions/js/misc/config.j
 
 import { createLabelPage } from './prefsModules/labelPage.js';
 import { createMainPage } from './prefsModules/mainPage.js';
-import { getMonthFontSupport } from './lib/utils.js';
+import { getMonthFontSupport, registerBundledFonts } from './lib/utils.js';
 
 export default class ModernClockPreferences extends ExtensionPreferences {
     fillPreferencesWindow(window) {
@@ -31,6 +32,16 @@ export default class ModernClockPreferences extends ExtensionPreferences {
             if (!iconTheme.get_search_path().includes(iconThemePath))
                 iconTheme.add_search_path(iconThemePath);
         });
+
+        // Load the bundled fonts so they can be previewed and picked before they are installed
+        // (Pango 1.56+ only, see registerBundledFonts)
+        try {
+            registerBundledFonts(GLib.build_filenamev([this.path, 'fonts']), [
+                PangoCairo.FontMap.get_default(),
+            ]);
+        } catch (e) {
+            console.warn(`[${this.metadata.name}] failed to load the bundled fonts:`, e);
+        }
 
         const settings = this.getSettings();
         const shellVersion = parseFloat(Config.PACKAGE_VERSION);

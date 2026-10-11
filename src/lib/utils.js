@@ -17,6 +17,9 @@ const MONTH_NAMES = {
 // punctuation that appears in locale month/weekday names (e.g. "SEPT.", "D’ABRIL").
 const IGNORED_RE = /[\p{Z}\p{Cf}.\-'\u02bc\u2018\u2019]/u;
 
+/** Bundled font files in the extension's `fonts` folder, with the family each one provides. */
+export const FONT_FILES = { 'Anurati.otf': 'Anurati', 'Poppins.ttf': 'Poppins' };
+
 function namesFor(count, format, makeDate) {
     return Array.from({ length: count }, (v_, i) =>
         makeDate(i + 1)
@@ -43,6 +46,30 @@ function getSupport(fontFamily, names) {
     const font = loadFont(fontFamily);
     if (!font) return { long: false, short: false };
     return { long: coversText(font, names.long), short: coversText(font, names.short) };
+}
+
+/**
+ * Loads the bundled fonts straight from their files into the given font maps, so they can be used
+ * right away without being installed. Fonts a map already provides are skipped, so calling this
+ * again (e.g. on every enable) doesn't add them twice.
+ *
+ * Needs `Pango.FontMap.add_font_file()`, added in Pango 1.56 (GNOME 48).
+ *
+ * @param {string} fontsDir - The path of the folder holding the bundled fonts.
+ * @param {Pango.FontMap[]} fontMaps - The font maps to load the fonts into.
+ * @returns {boolean} `false` if Pango is too old to load font files, `true` otherwise.
+ * @throws {GLib.Error} If a font file can't be loaded.
+ */
+export function registerBundledFonts(fontsDir, fontMaps) {
+    if (!fontMaps.every(fontMap => typeof fontMap.add_font_file === 'function')) return false;
+
+    new Set(fontMaps).forEach(fontMap =>
+        Object.entries(FONT_FILES).forEach(([fileName, family]) => {
+            if (!fontMap.get_family(family))
+                fontMap.add_font_file(GLib.build_filenamev([fontsDir, fileName]));
+        })
+    );
+    return true;
 }
 
 /**
