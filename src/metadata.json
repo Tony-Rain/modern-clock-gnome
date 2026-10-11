@@ -6,5 +6,5 @@
     "url": "https://github.com/Tony-Rain/modern-clock-gnome",
     "settings-schema": "org.gnome.shell.extensions.modernclock",
     "gettext-domain": "modernclock@gnome-port",
-    "version-name": "3.0"
+    "version-name": "3.1"
 }
