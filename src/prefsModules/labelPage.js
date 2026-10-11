@@ -57,7 +57,7 @@ export function createLabelPage(settings, { pageTitle, pageIcon, keyPrefix }) {
         dialog: new Gtk.FontDialog({ modal: true }),
         level: Gtk.FontLevel.FAMILY,
         font_desc: Pango.FontDescription.from_string('Sans'), // placeholder before the bundled fonts are registered
-        use_font: true,
+        use_font: false, // display fonts like Anurati lack lowercase glyphs
         valign: Gtk.Align.CENTER,
     });
     const fontResetButton = new Gtk.Button({
