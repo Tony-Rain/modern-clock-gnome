@@ -207,6 +207,8 @@ export default class ModernClockExtension extends Extension {
                 this._themeColor = this._getThemeColor();
                 this._clockWidgets.forEach(clockWidget => this._updateClockStyle(clockWidget));
             },
+            'notify::scale-factor',
+            () => this._clockWidgets.forEach(clockWidget => this._updateClockStyle(clockWidget)),
             this
         );
 
@@ -434,8 +436,11 @@ export default class ModernClockExtension extends Extension {
         if (!monitor) return;
         clockWidget.monitor = monitor;
 
+        // St multiplies CSS px by its scale factor. In the physical layout mode (X11, or Wayland
+        // without fractional scaling), the monitor size is in physical pixels and already includes
+        // that scale, so it has to be taken out. In the logical layout mode, the scale factor is 1.
         const referenceDimension = Math.min(clockWidget.monitor.width, clockWidget.monitor.height);
-        const monitorScale = referenceDimension / BASE_HEIGHT;
+        const monitorScale = referenceDimension / BASE_HEIGHT / this._themeContext.scale_factor;
 
         clockWidget.weekdayLabel.visible = this._settings.get_boolean('weekday-enabled');
         clockWidget.dateLabel.visible = this._settings.get_boolean('date-enabled');
