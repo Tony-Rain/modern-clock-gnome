@@ -83,27 +83,28 @@ export function createLabelPage(settings, { pageTitle, pageIcon, keyPrefix }) {
     };
 
     const syncFontFromSettings = () => {
-        const font = settings.get_string(keys.font);
-        const family = Pango.FontDescription.from_string(font).get_family() ?? font;
+        // The key holds a family name, not a font description: parsing it with
+        // Pango.FontDescription.from_string() would strip words such as "Condensed" or "Light"
+        // (e.g. "Open Sans Condensed" -> "Open Sans")
+        const family = settings.get_string(keys.font);
 
         // - if the font is registered: display it
         // - else if it is not the bundled default font: a genuinely invalid value, so reset the key
         // - else: this is the bundled default font, not yet registered in the font map. Display
         //   its name in the default font.
-        if (!findFontFamily(family) && font !== defaultFont) {
+        if (!findFontFamily(family) && family !== defaultFont) {
             settings.reset(keys.font);
             return;
         }
         showFont(family);
-        fontResetButton.set_visible(font !== defaultFont);
+        fontResetButton.set_visible(family !== defaultFont);
     };
     syncFontFromSettings();
 
     fontButton.connect('clicked', () => {
-        const current = Pango.FontDescription.from_string(settings.get_string(keys.font));
         fontDialog.choose_family(
             fontButton.get_root(),
-            findFontFamily(current.get_family()),
+            findFontFamily(settings.get_string(keys.font)),
             null,
             (dialog, result) => {
                 let chosen;
