@@ -189,8 +189,14 @@ export function createMainPage(settings, metadata, shellVersion, { pageTitle, pa
         dialog.set_default_response('cancel');
         dialog.set_close_response('cancel');
         dialog.connect('response', (dialog_, response) => {
-            if (response === 'reset')
-                settings.settings_schema.list_keys().forEach(key => settings.reset(key));
+            if (response !== 'reset') return;
+
+            // Reset every key in a single write, so the shell never redraws the clock with half
+            // of the settings reset. A separate object is used because delay() can't be undone.
+            const batch = new Gio.Settings({ settings_schema: settings.settings_schema });
+            batch.delay();
+            batch.settings_schema.list_keys().forEach(key => batch.reset(key));
+            batch.apply();
         });
         dialog.present(resetRow);
     });
