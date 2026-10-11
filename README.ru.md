@@ -98,7 +98,7 @@ gnome-extensions prefs modernclock@gnome-port
 gnome-extensions uninstall modernclock@gnome-port
 ```
 
-Встроенные шрифты после этого остаются в системе. Чтобы удалить и их:
+Встроенные шрифты не удаляются автоматически. Чтобы удалить и их:
 
 ```bash
 rm -rf ~/.local/share/fonts/modernclock
