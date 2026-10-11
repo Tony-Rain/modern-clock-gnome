@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Modern Clock for GNOME\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-11 23:04+0300\n"
+"POT-Creation-Date: 2026-10-12 01:50+0300\n"
 "PO-Revision-Date: 2026-10-09 13:50+0100\n"
 "Last-Translator: Djinn Alexio <djinnalexio+gnome@proton.me>\n"
 "Language-Team: French\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Gtranslator 51.0\n"
 
-#: src/extension.js:593
+#: src/extension.js:627
 msgid "Modern Clock Fonts Installed"
 msgstr "Polices de Modern Clock installées"
 
-#: src/extension.js:594
+#: src/extension.js:628
 msgid "Log out and back in for the new fonts to take effect."
 msgstr ""
 "Déconnectez-vous puis reconnectez-vous pour que les nouvelles polices soient "
@@ -88,6 +88,18 @@ msgstr "Basé sur"
 msgid "Fonts"
 msgstr "Polices"
 
+#: src/prefsModules/colorButton.js:104 src/prefsModules/labelPage.js:149
+msgid "Color"
+msgstr "Couleur"
+
+#: src/prefsModules/colorButton.js:106 src/prefsModules/mainPage.js:186
+msgid "Cancel"
+msgstr "Annuler"
+
+#: src/prefsModules/colorButton.js:109
+msgid "Select"
+msgstr "Sélectionner"
+
 #: src/prefsModules/labelPage.js:45
 msgid "Appearance"
 msgstr "Apparence"
@@ -104,47 +116,43 @@ msgstr "Police"
 msgid "Reset to default"
 msgstr "Réinitialiser"
 
-#: src/prefsModules/labelPage.js:131
+#: src/prefsModules/labelPage.js:132
 msgid "Size"
 msgstr "Taille"
 
-#: src/prefsModules/labelPage.js:133
+#: src/prefsModules/labelPage.js:134
 msgid "Large"
 msgstr "Grand"
 
-#: src/prefsModules/labelPage.js:133
+#: src/prefsModules/labelPage.js:134
 msgid "Small"
 msgstr "Petit"
 
-#: src/prefsModules/labelPage.js:140
+#: src/prefsModules/labelPage.js:141
 msgid "Letter Spacing"
 msgstr "Espacement des lettres"
 
-#: src/prefsModules/labelPage.js:142
+#: src/prefsModules/labelPage.js:143
 msgid "Narrow"
 msgstr "Étroit"
 
-#: src/prefsModules/labelPage.js:142
+#: src/prefsModules/labelPage.js:143
 msgid "Wide"
 msgstr "Large"
 
-#: src/prefsModules/labelPage.js:148
-msgid "Color"
-msgstr "Couleur"
-
-#: src/prefsModules/labelPage.js:176
+#: src/prefsModules/labelPage.js:154
 msgid "Use custom color"
 msgstr "Utiliser la couleur personnalisée"
 
-#: src/prefsModules/labelPage.js:190
+#: src/prefsModules/labelPage.js:168
 msgid "Decoration"
 msgstr "Décoration"
 
-#: src/prefsModules/labelPage.js:195
+#: src/prefsModules/labelPage.js:173
 msgid "Prefix"
 msgstr "Préfixe"
 
-#: src/prefsModules/labelPage.js:195
+#: src/prefsModules/labelPage.js:173
 msgid "Suffix"
 msgstr "Suffixe"
 
@@ -216,36 +224,32 @@ msgstr "Afficher la date en anglais."
 msgid "Mode"
 msgstr "Mode"
 
-#: src/prefsModules/mainPage.js:164
+#: src/prefsModules/mainPage.js:165
 msgctxt "preferences group title"
 msgid "Reset"
 msgstr "Réinitialisation"
 
-#: src/prefsModules/mainPage.js:168
+#: src/prefsModules/mainPage.js:170
 msgid "All Settings"
 msgstr "Tous les paramètres"
 
-#: src/prefsModules/mainPage.js:169
+#: src/prefsModules/mainPage.js:171
 msgid "Restore every setting to its default value"
 msgstr "Rétablir la valeur par défaut de chaque paramètre"
 
-#: src/prefsModules/mainPage.js:172 src/prefsModules/mainPage.js:185
+#: src/prefsModules/mainPage.js:174 src/prefsModules/mainPage.js:187
 msgid "Reset"
 msgstr "Réinitialiser"
 
-#: src/prefsModules/mainPage.js:181
+#: src/prefsModules/mainPage.js:183
 msgid "Reset All Settings?"
 msgstr "Réinitialiser tous les paramètres ?"
 
-#: src/prefsModules/mainPage.js:182
+#: src/prefsModules/mainPage.js:184
 msgid "Every setting of Modern Clock will be restored to its default value."
 msgstr ""
 "Tous les paramètres de Modern Clock seront rétablis à leur valeur par défaut."
 
-#: src/prefsModules/mainPage.js:184
-msgid "Cancel"
-msgstr "Annuler"
-
-#: src/prefsModules/mainPage.js:198
+#: src/prefsModules/mainPage.js:206
 msgid "Information"
 msgstr "Informations"

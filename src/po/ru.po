@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Modern Clock for GNOME\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-11 23:04+0300\n"
+"POT-Creation-Date: 2026-10-12 01:50+0300\n"
 "PO-Revision-Date: 2026-10-09 13:49+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -19,11 +19,11 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: src/extension.js:593
+#: src/extension.js:627
 msgid "Modern Clock Fonts Installed"
 msgstr "Шрифты Modern Clock установлены"
 
-#: src/extension.js:594
+#: src/extension.js:628
 msgid "Log out and back in for the new fonts to take effect."
 msgstr "Выйдите из системы и войдите снова, чтобы применить новые шрифты."
 
@@ -87,6 +87,18 @@ msgstr "Основано на"
 msgid "Fonts"
 msgstr "Шрифты"
 
+#: src/prefsModules/colorButton.js:104 src/prefsModules/labelPage.js:149
+msgid "Color"
+msgstr "Цвет"
+
+#: src/prefsModules/colorButton.js:106 src/prefsModules/mainPage.js:186
+msgid "Cancel"
+msgstr "Отмена"
+
+#: src/prefsModules/colorButton.js:109
+msgid "Select"
+msgstr "Выбрать"
+
 #: src/prefsModules/labelPage.js:45
 msgid "Appearance"
 msgstr "Внешний вид"
@@ -103,47 +115,43 @@ msgstr "Шрифт"
 msgid "Reset to default"
 msgstr "Сбросить"
 
-#: src/prefsModules/labelPage.js:131
+#: src/prefsModules/labelPage.js:132
 msgid "Size"
 msgstr "Размер"
 
-#: src/prefsModules/labelPage.js:133
+#: src/prefsModules/labelPage.js:134
 msgid "Large"
 msgstr "Крупный"
 
-#: src/prefsModules/labelPage.js:133
+#: src/prefsModules/labelPage.js:134
 msgid "Small"
 msgstr "Мелкий"
 
-#: src/prefsModules/labelPage.js:140
+#: src/prefsModules/labelPage.js:141
 msgid "Letter Spacing"
 msgstr "Межсимвольный интервал"
 
-#: src/prefsModules/labelPage.js:142
+#: src/prefsModules/labelPage.js:143
 msgid "Narrow"
 msgstr "Узкий"
 
-#: src/prefsModules/labelPage.js:142
+#: src/prefsModules/labelPage.js:143
 msgid "Wide"
 msgstr "Широкий"
 
-#: src/prefsModules/labelPage.js:148
-msgid "Color"
-msgstr "Цвет"
-
-#: src/prefsModules/labelPage.js:176
+#: src/prefsModules/labelPage.js:154
 msgid "Use custom color"
 msgstr "Использовать свой цвет"
 
-#: src/prefsModules/labelPage.js:190
+#: src/prefsModules/labelPage.js:168
 msgid "Decoration"
 msgstr "Обрамление"
 
-#: src/prefsModules/labelPage.js:195
+#: src/prefsModules/labelPage.js:173
 msgid "Prefix"
 msgstr "Префикс"
 
-#: src/prefsModules/labelPage.js:195
+#: src/prefsModules/labelPage.js:173
 msgid "Suffix"
 msgstr "Суффикс"
 
@@ -215,35 +223,31 @@ msgstr "Использовать английский."
 msgid "Mode"
 msgstr "Режим"
 
-#: src/prefsModules/mainPage.js:164
+#: src/prefsModules/mainPage.js:165
 msgctxt "preferences group title"
 msgid "Reset"
 msgstr "Сброс"
 
-#: src/prefsModules/mainPage.js:168
+#: src/prefsModules/mainPage.js:170
 msgid "All Settings"
 msgstr "Все настройки"
 
-#: src/prefsModules/mainPage.js:169
+#: src/prefsModules/mainPage.js:171
 msgid "Restore every setting to its default value"
 msgstr "Вернуть всем настройкам значения по умолчанию"
 
-#: src/prefsModules/mainPage.js:172 src/prefsModules/mainPage.js:185
+#: src/prefsModules/mainPage.js:174 src/prefsModules/mainPage.js:187
 msgid "Reset"
 msgstr "Сбросить"
 
-#: src/prefsModules/mainPage.js:181
+#: src/prefsModules/mainPage.js:183
 msgid "Reset All Settings?"
 msgstr "Сбросить все настройки?"
 
-#: src/prefsModules/mainPage.js:182
+#: src/prefsModules/mainPage.js:184
 msgid "Every setting of Modern Clock will be restored to its default value."
 msgstr "Все настройки Modern Clock вернутся к значениям по умолчанию."
 
-#: src/prefsModules/mainPage.js:184
-msgid "Cancel"
-msgstr "Отмена"
-
-#: src/prefsModules/mainPage.js:198
+#: src/prefsModules/mainPage.js:206
 msgid "Information"
 msgstr "Информация"
