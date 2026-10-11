@@ -8,7 +8,7 @@
 XDG_DATA_HOME ?= $(HOME)/.local/share
 
 UUID := $(shell jq -r ".uuid" src/metadata.json)
-ZIP := dist/modernclock.zip
+ZIP := dist/modernclock@gnome.shell-extension.zip
 DCONF_DIR := /org/gnome/shell/extensions/modernclock/
 FONTS_DIR := $(XDG_DATA_HOME)/fonts/modernclock
 

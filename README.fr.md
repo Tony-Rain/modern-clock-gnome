@@ -53,10 +53,10 @@ Un widget d’horloge de bureau pour GNOME, inspiré de [Modern Clock for KDE][m
 
 #### Option 1 : archive de version
 
-Téléchargez `modernclock.zip` depuis la page des [versions][releases], puis installez l’extension avec :
+Téléchargez `modernclock@gnome.shell-extension.zip` depuis la page des [versions][releases], puis installez l’extension avec :
 
 ```bash
-gnome-extensions install -f modernclock.zip
+gnome-extensions install -f modernclock@gnome.shell-extension.zip
 ```
 
 #### Option 2 : compiler depuis les sources

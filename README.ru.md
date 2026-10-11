@@ -53,10 +53,10 @@
 
 #### Вариант 1: архив из релиза
 
-Скачайте `modernclock.zip` со страницы [релизов][releases] и установите командой:
+Скачайте `modernclock@gnome.shell-extension.zip` со страницы [релизов][releases] и установите командой:
 
 ```bash
-gnome-extensions install -f modernclock.zip
+gnome-extensions install -f modernclock@gnome.shell-extension.zip
 ```
 
 #### Вариант 2: сборка из исходников

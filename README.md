@@ -53,10 +53,10 @@ A desktop clock widget for GNOME, inspired by [Modern Clock for KDE][modern-cloc
 
 #### Option 1: Release Zip
 
-Download `modernclock.zip` from [Releases][releases], then install it with:
+Download `modernclock@gnome.shell-extension.zip` from [Releases][releases], then install it with:
 
 ```bash
-gnome-extensions install -f modernclock.zip
+gnome-extensions install -f modernclock@gnome.shell-extension.zip
 ```
 
 #### Option 2: Build from Source
