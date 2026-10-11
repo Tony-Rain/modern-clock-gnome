@@ -5,6 +5,9 @@ import Adw from 'gi://Adw';
 import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
 
+const SNAP_VALUE = 0.5; // default value of every slider
+const SNAP_DISTANCE = 0.03;
+
 /**
  * Creates a row with a horizontal slider over the range 0-1.
  *
@@ -45,6 +48,16 @@ export function createScaleRow(settings, { title, key, marks = [], inverted = fa
     scale.add_mark(0.5, Gtk.PositionType.TOP, null);
     scale.add_mark(0.75, Gtk.PositionType.TOP, null);
     scale.add_mark(0.9, Gtk.PositionType.TOP, marks[1]);
+
+    // Dragging by hand rarely lands exactly on the middle, which is the default value of every
+    // slider, and even 0.01 away gives a visibly different size. Snap to it when close enough.
+    // Keyboard and scroll steps are left alone, so that small adjustments stay possible.
+    scale.connect('change-value', (range, scroll, value) => {
+        if (scroll !== Gtk.ScrollType.JUMP || Math.abs(value - SNAP_VALUE) >= SNAP_DISTANCE)
+            return false;
+        range.set_value(SNAP_VALUE);
+        return true;
+    });
 
     row.set_child(scale);
     settings.bind(key, scale.adjustment, 'value', Gio.SettingsBindFlags.DEFAULT);
