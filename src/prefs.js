@@ -18,8 +18,8 @@ import { getMonthFontSupport } from './lib/utils.js';
 
 export default class ModernClockPreferences extends ExtensionPreferences {
     fillPreferencesWindow(window) {
-        window.default_width = 360;
-        window.default_height = 600;
+        window.default_width = 600;
+        window.default_height = 720;
 
         // Add paths for custom icons:
         // - 'assets' for the logo
