@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 import Adw from 'gi://Adw';
-import Gdk from 'gi://Gdk';
 import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
 import Pango from 'gi://Pango';
@@ -11,6 +10,7 @@ import PangoCairo from 'gi://PangoCairo';
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
 import { getFontPreviewText } from '../lib/utils.js';
+import { createColorButton } from './colorButton.js';
 import { createScaleRow } from './scaleRow.js';
 
 /**
@@ -148,30 +148,7 @@ export function createLabelPage(settings, { pageTitle, pageIcon, keyPrefix }) {
     //#region Color
     const colorRow = new Adw.ActionRow({ title: _('Color') });
 
-    const colorButton = new Gtk.ColorDialogButton({
-        dialog: new Gtk.ColorDialog({ modal: true, with_alpha: true }),
-        valign: Gtk.Align.CENTER,
-    });
-
-    let syncingColor = false;
-    const syncColorFromSettings = () => {
-        const rgba = new Gdk.RGBA();
-        if (!rgba.parse(settings.get_string(keys.color))) {
-            settings.reset(keys.color);
-            return;
-        }
-        syncingColor = true;
-        colorButton.set_rgba(rgba);
-        syncingColor = false;
-    };
-    syncColorFromSettings();
-
-    colorButton.connect('notify::rgba', () => {
-        //syncing from a settings change means no need to set the setting again
-        if (syncingColor) return;
-        settings.set_string(keys.color, colorButton.get_rgba().to_string());
-    });
-    settings.connect(`changed::${keys.color}`, syncColorFromSettings);
+    const colorButton = createColorButton(settings, keys.color);
 
     const toggle = new Gtk.CheckButton({
         tooltip_text: _('Use custom color'),
