@@ -5,10 +5,7 @@
 import Adw from 'gi://Adw';
 import Gtk from 'gi://Gtk';
 
-import {
-    gettext as _,
-    pgettext,
-} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
 //#region Credits
 // Feel free to add your name and url in the relevant section below if you have contributed.
@@ -67,7 +64,10 @@ export function createAboutRow(metadata) {
             release_notes: releaseNotes,
             release_notes_version: version,
             support_url: supportUrl,
-            translator_credits: pgettext('(USER)NAME EMAIL', 'translator_credits'),
+            // Translators: To be credited in the "About" dialog, put your
+            // name(s) here, optionally followed by an <email> or a URL.
+            // One translator per line.
+            translator_credits: _('translator_credits'),
             version: version,
             website: metadata.url,
         });

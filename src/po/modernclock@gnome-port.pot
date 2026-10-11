@@ -1,12 +1,12 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) YEAR Modern Clock for GNOME Contributors
+# This file is distributed under the same license as the Modern Clock for GNOME package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Modern Clock for GNOME\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-09 13:49+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -62,12 +62,14 @@ msgstr ""
 msgid "AM / PM"
 msgstr ""
 
-#: src/prefsModules/aboutRow.js:46
+#: src/prefsModules/aboutRow.js:43
 msgid "About Modern Clock"
 msgstr ""
 
+#. Translators: To be credited in the "About" dialog, put your
+#. name(s) here, optionally followed by an <email> or a URL.
+#. One translator per line.
 #: src/prefsModules/aboutRow.js:70
-msgctxt "(USER)NAME EMAIL"
 msgid "translator_credits"
 msgstr ""
 

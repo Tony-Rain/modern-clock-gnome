@@ -109,7 +109,9 @@ shexli: pack
 
 pot:
 	@mkdir -p src/po
-	find src -name "*.js" | sort | xgettext --from-code=UTF-8 --sort-by-file --files-from=- --output=src/po/$(UUID).pot
+	find src -name "*.js" | sort | xgettext --files-from=- --sort-by-file --from-code=UTF-8 \
+		--output=src/po/$(UUID).pot --package-name="Modern Clock for GNOME" \
+		--add-comments=Translators: --copyright-holder="Modern Clock for GNOME Contributors"
 	@echo "✓ Updated '$(UUID).pot' file for translations."
 
 update-po: pot

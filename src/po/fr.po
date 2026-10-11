@@ -1,11 +1,11 @@
-# French translation for modernclock@gnome-port.
-# Copyright (C) 2026 Djinn Alexio
-# This file is distributed under the same license as the modernclock@gnome-port package.
+# French translations for Modern Clock for GNOME.
+# Copyright (C) 2026 Modern Clock for GNOME Contributors
+# This file is distributed under the same license as the Modern Clock for GNOME package.
 # Djinn Alexio <djinnalexio+gnome@proton.me>, 2026.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: modernclock@gnome-port\n"
+"Project-Id-Version: Modern Clock for GNOME\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-09 13:49+0100\n"
 "PO-Revision-Date: 2026-10-09 13:50+0100\n"
@@ -65,12 +65,14 @@ msgstr "24 heures"
 msgid "AM / PM"
 msgstr "AM / PM"
 
-#: src/prefsModules/aboutRow.js:46
+#: src/prefsModules/aboutRow.js:43
 msgid "About Modern Clock"
 msgstr "À propos de Modern Clock"
 
+#. Translators: To be credited in the "About" dialog, put your
+#. name(s) here, optionally followed by an <email> or a URL.
+#. One translator per line.
 #: src/prefsModules/aboutRow.js:70
-msgctxt "(USER)NAME EMAIL"
 msgid "translator_credits"
 msgstr "Djinn Alexio <djinnalexio+gnome@proton.me>"
 
