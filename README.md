@@ -90,6 +90,20 @@ gnome-extensions prefs modernclock@gnome-port
 
 </div>
 
+## Uninstallation
+
+Uninstall the extension via the **Extensions** app or run:
+
+```bash
+gnome-extensions uninstall modernclock@gnome-port
+```
+
+The bundled fonts remain installed afterwards. To remove them as well:
+
+```bash
+rm -rf ~/.local/share/fonts/modernclock
+```
+
 ## Known Limitations
 
 The clock doesn't show during the workspace switch animation (Wayland only), on the lock screen, or in the Activities overview. This is because the widget lives in the shell's background layer.

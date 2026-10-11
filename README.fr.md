@@ -90,6 +90,20 @@ gnome-extensions prefs modernclock@gnome-port
 
 </div>
 
+## Désinstallation
+
+Désinstallez l’extension via l’application **Extensions** ou exécutez :
+
+```bash
+gnome-extensions uninstall modernclock@gnome-port
+```
+
+Les polices incluses restent ensuite installées. Pour les supprimer également :
+
+```bash
+rm -rf ~/.local/share/fonts/modernclock
+```
+
 ## Limitations connues
 
 L’horloge ne s’affiche pas pendant les animations de changement d’espace de travail (Wayland uniquement), sur l’écran de verrouillage ni dans la vue d’ensemble des Activités. Cela s’explique par le fait que le widget se trouve dans la couche d’arrière-plan du GNOME shell.
