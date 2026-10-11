@@ -98,7 +98,7 @@ Désinstallez l’extension via l’application **Extensions** ou exécutez :
 gnome-extensions uninstall modernclock@gnome-port
 ```
 
-Les polices incluses restent ensuite installées. Pour les supprimer également :
+Les polices incluses ne sont pas retirées automatiquement. Pour les supprimer également :
 
 ```bash
 rm -rf ~/.local/share/fonts/modernclock

@@ -98,7 +98,7 @@ Uninstall the extension via the **Extensions** app or run:
 gnome-extensions uninstall modernclock@gnome-port
 ```
 
-The bundled fonts remain installed afterwards. To remove them as well:
+The bundled fonts are not removed automatically. To delete them as well:
 
 ```bash
 rm -rf ~/.local/share/fonts/modernclock
