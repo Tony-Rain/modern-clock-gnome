@@ -29,7 +29,7 @@ Un widget d’horloge de bureau pour GNOME, inspiré de [Modern Clock for KDE][m
 - **Adapté au thème (optionnel)** — peut utiliser la couleur d’accentuation du système au lieu d’une couleur personnalisée
 
 > [!NOTE]
-> À la première activation, les polices incluses sont copiées dans `~/.local/share/fonts/modernclock`, et vous devez vous déconnecter puis vous reconnecter pour qu’elles prennent effet. Après la désinstallation de l’extension, vous pouvez supprimer ce dossier.
+> Sous GNOME 48 et versions ultérieures, les polices incluses sont chargées directement depuis l’extension et fonctionnent immédiatement. Sous GNOME 46 et 47, elles sont copiées dans `~/.local/share/fonts/modernclock` à la première activation, et vous devez vous déconnecter puis vous reconnecter pour qu’elles prennent effet.
 
 ## Captures d’écran
 
@@ -98,7 +98,7 @@ Désinstallez l’extension via l’application **Extensions** ou exécutez :
 gnome-extensions uninstall modernclock@gnome-port
 ```
 
-Les polices incluses ne sont pas retirées automatiquement. Pour les supprimer également :
+Sous GNOME 46 et 47, les polices copiées ne sont pas retirées automatiquement. Pour les supprimer également :
 
 ```bash
 rm -rf ~/.local/share/fonts/modernclock

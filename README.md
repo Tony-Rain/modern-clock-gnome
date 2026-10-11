@@ -29,7 +29,7 @@ A desktop clock widget for GNOME, inspired by [Modern Clock for KDE][modern-cloc
 - **Optionally theme-aware** — can use your system accent color instead of a custom one
 
 > [!NOTE]
-> On first run, the bundled fonts are copied to `~/.local/share/fonts/modernclock`, and you need to log out and back in for them to take effect. After uninstalling the extension, you can delete that folder.
+> On GNOME 48 and later, the bundled fonts are loaded straight from the extension and work right away. On GNOME 46 and 47, they are copied to `~/.local/share/fonts/modernclock` on first run, and you need to log out and back in for them to take effect.
 
 ## Screenshots
 
@@ -98,7 +98,7 @@ Uninstall the extension via the **Extensions** app or run:
 gnome-extensions uninstall modernclock@gnome-port
 ```
 
-The bundled fonts are not removed automatically. To delete them as well:
+On GNOME 46 and 47, the copied fonts are not removed automatically. To delete them as well:
 
 ```bash
 rm -rf ~/.local/share/fonts/modernclock
