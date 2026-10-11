@@ -1,0 +1,220 @@
+# Russian translations for Modern Clock for package
+# Английские переводы для пакета Modern Clock for.
+# Copyright (C) 2026 Modern Clock for GNOME Contributors
+# This file is distributed under the same license as the Modern Clock for GNOME package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Modern Clock for GNOME\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-11 21:41+0300\n"
+"PO-Revision-Date: 2026-10-09 13:49+0100\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: src/extension.js:593
+msgid "Modern Clock Fonts Installed"
+msgstr "Шрифты Modern Clock установлены"
+
+#: src/extension.js:594
+msgid "Log out and back in for the new fonts to take effect."
+msgstr "Выйдите из системы и войдите снова, чтобы применить новые шрифты."
+
+#: src/prefs.js:36
+msgid "General"
+msgstr "Основные"
+
+#: src/prefs.js:44
+msgid "Weekday"
+msgstr "День недели"
+
+#: src/prefs.js:50
+msgid "Date"
+msgstr "Дата"
+
+#: src/prefs.js:55
+msgid "Time"
+msgstr "Время"
+
+#: src/prefs.js:69 src/prefs.js:86 src/prefs.js:109 src/prefs.js:155
+#: src/prefs.js:170
+msgid "Format"
+msgstr "Формат"
+
+#: src/prefs.js:75 src/prefs.js:87
+msgid "Full"
+msgstr "Полный"
+
+#: src/prefs.js:77 src/prefs.js:87
+msgid "Abbreviated"
+msgstr "Сокращённый"
+
+#: src/prefs.js:161 src/prefs.js:171
+msgid "24-hour"
+msgstr "24-часовой"
+
+#: src/prefs.js:162 src/prefs.js:171
+msgid "12-hour"
+msgstr "12-часовой"
+
+#: src/prefsModules/aboutRow.js:43
+msgid "About Modern Clock"
+msgstr "О Modern Clock"
+
+#. Translators: To be credited in the "About" dialog, put your
+#. name(s) here, optionally followed by an <email> or a URL.
+#. One translator per line.
+#: src/prefsModules/aboutRow.js:70
+msgid "translator_credits"
+msgstr "Tony-Rain https://github.com/Tony-Rain"
+
+#: src/prefsModules/aboutRow.js:74
+msgid "Extension Page"
+msgstr "Страница расширения"
+
+#: src/prefsModules/aboutRow.js:75
+msgid "Based on"
+msgstr "Основано на"
+
+#: src/prefsModules/aboutRow.js:78
+msgid "Fonts"
+msgstr "Шрифты"
+
+#: src/prefsModules/labelPage.js:44
+msgid "Appearance"
+msgstr "Внешний вид"
+
+#: src/prefsModules/labelPage.js:48
+msgid "Show"
+msgstr "Показывать"
+
+#: src/prefsModules/labelPage.js:54
+msgid "Font"
+msgstr "Шрифт"
+
+#: src/prefsModules/labelPage.js:65
+msgid "Reset to default"
+msgstr "Сбросить"
+
+#: src/prefsModules/labelPage.js:114
+msgid "Size"
+msgstr "Размер"
+
+#: src/prefsModules/labelPage.js:116
+msgid "Large"
+msgstr "Крупный"
+
+#: src/prefsModules/labelPage.js:116
+msgid "Small"
+msgstr "Мелкий"
+
+#: src/prefsModules/labelPage.js:123
+msgid "Letter Spacing"
+msgstr "Межсимвольный интервал"
+
+#: src/prefsModules/labelPage.js:125
+msgid "Narrow"
+msgstr "Узкий"
+
+#: src/prefsModules/labelPage.js:125
+msgid "Wide"
+msgstr "Широкий"
+
+#: src/prefsModules/labelPage.js:131
+msgid "Color"
+msgstr "Цвет"
+
+#: src/prefsModules/labelPage.js:159
+msgid "Use custom color"
+msgstr "Использовать свой цвет"
+
+#: src/prefsModules/labelPage.js:173
+msgid "Decoration"
+msgstr "Обрамление"
+
+#: src/prefsModules/labelPage.js:178
+msgid "Prefix"
+msgstr "Префикс"
+
+#: src/prefsModules/labelPage.js:178
+msgid "Suffix"
+msgstr "Суффикс"
+
+#: src/prefsModules/mainPage.js:35
+msgid "Layout"
+msgstr "Расположение"
+
+#: src/prefsModules/mainPage.js:39
+msgid "Horizontal"
+msgstr "По горизонтали"
+
+#: src/prefsModules/mainPage.js:41
+msgid "Left"
+msgstr "Слева"
+
+#: src/prefsModules/mainPage.js:41
+msgid "Right"
+msgstr "Справа"
+
+#: src/prefsModules/mainPage.js:45
+msgid "Vertical"
+msgstr "По вертикали"
+
+#: src/prefsModules/mainPage.js:47
+msgid "Bottom"
+msgstr "Снизу"
+
+#: src/prefsModules/mainPage.js:47
+msgid "Top"
+msgstr "Сверху"
+
+#: src/prefsModules/mainPage.js:68
+msgid "Language"
+msgstr "Язык"
+
+#: src/prefsModules/mainPage.js:74
+msgid "System"
+msgstr "Системный"
+
+#: src/prefsModules/mainPage.js:76
+msgid ""
+"Use your time format language. Some characters may appear in a different "
+"font."
+msgstr ""
+"Использовать язык формата времени. Некоторые символы могут отображаться "
+"другим шрифтом."
+
+#: src/prefsModules/mainPage.js:80
+msgid "Auto"
+msgstr "Авто"
+
+#: src/prefsModules/mainPage.js:82
+msgid ""
+"Use your time format language, falling back to English if the font does not "
+"support it."
+msgstr ""
+"Использовать язык формата времени или английский, если шрифт его не "
+"поддерживает."
+
+#: src/prefsModules/mainPage.js:86
+msgid "English"
+msgstr "Английский"
+
+#: src/prefsModules/mainPage.js:87
+msgid "Use English."
+msgstr "Использовать английский."
+
+#: src/prefsModules/mainPage.js:112 src/prefsModules/mainPage.js:137
+msgid "Mode"
+msgstr "Режим"
+
+#: src/prefsModules/mainPage.js:161
+msgid "Information"
+msgstr "Информация"
