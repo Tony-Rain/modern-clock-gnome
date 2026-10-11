@@ -12,6 +12,7 @@ import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensio
 import { getFontPreviewText } from '../lib/utils.js';
 import { createColorButton } from './colorButton.js';
 import { createScaleRow } from './scaleRow.js';
+import { connectSetting } from './settingsHandlers.js';
 
 /**
  * Creates a preferences page for a clock label (weekday, date or time).
@@ -118,7 +119,7 @@ export function createLabelPage(settings, { pageTitle, pageIcon, keyPrefix }) {
         );
     });
     fontResetButton.connect('clicked', () => settings.reset(keys.font));
-    settings.connect(`changed::${keys.font}`, syncFontFromSettings);
+    connectSetting(settings, keys.font, syncFontFromSettings);
 
     const fontBox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, spacing: 12 });
     fontBox.append(fontResetButton);
@@ -194,7 +195,7 @@ export function createLabelPage(settings, { pageTitle, pageIcon, keyPrefix }) {
             )
         )
     );
-    settings.connect(`changed::${keys.deco}`, syncDecoFromSettings);
+    connectSetting(settings, keys.deco, syncDecoFromSettings);
 
     const decoBox = new Gtk.Box({
         orientation: Gtk.Orientation.HORIZONTAL,

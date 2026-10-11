@@ -15,6 +15,7 @@ import * as Config from 'resource:///org/gnome/Shell/Extensions/js/misc/config.j
 
 import { createLabelPage } from './prefsModules/labelPage.js';
 import { createMainPage } from './prefsModules/mainPage.js';
+import { connectSetting, disconnectSettings } from './prefsModules/settingsHandlers.js';
 import { getMonthFontSupport, registerBundledFonts } from './lib/utils.js';
 
 export default class ModernClockPreferences extends ExtensionPreferences {
@@ -45,6 +46,12 @@ export default class ModernClockPreferences extends ExtensionPreferences {
 
         const settings = this.getSettings();
         const shellVersion = parseFloat(Config.PACKAGE_VERSION);
+
+        // The preferences process can outlive the window (see connectSetting)
+        window.connect('close-request', () => {
+            disconnectSettings(settings);
+            return false;
+        });
 
         //#region Main page
         window.add(
@@ -108,7 +115,7 @@ export default class ModernClockPreferences extends ExtensionPreferences {
             );
         }
 
-        settings.connect('changed::weekday-format', () => {
+        connectSetting(settings, 'weekday-format', () => {
             const mode = settings.get_enum('weekday-format');
             if (shellVersion >= 48) weekdayFormatToggleGroup.set_active(mode);
             else weekdayFormatRow.set_selected(mode);
@@ -152,9 +159,9 @@ export default class ModernClockPreferences extends ExtensionPreferences {
             settings.set_enum('date-format', dateFormatRow.get_selected())
         );
         ['language-mode', 'date-font'].forEach(key =>
-            settings.connect(`changed::${key}`, () => updateFormatExampleList())
+            connectSetting(settings, key, () => updateFormatExampleList())
         );
-        settings.connect('changed::date-format', () =>
+        connectSetting(settings, 'date-format', () =>
             dateFormatRow.set_selected(settings.get_enum('date-format'))
         );
 
@@ -192,7 +199,7 @@ export default class ModernClockPreferences extends ExtensionPreferences {
             );
         }
 
-        settings.connect('changed::time-format', () => {
+        connectSetting(settings, 'time-format', () => {
             const mode = settings.get_enum('time-format');
             if (shellVersion >= 48) timeFormatToggleGroup.set_active(mode);
             else timeFormatRow.set_selected(mode);

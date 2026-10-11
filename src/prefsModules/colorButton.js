@@ -7,6 +7,8 @@ import Gtk from 'gi://Gtk';
 
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
+import { connectSetting } from './settingsHandlers.js';
+
 const SWATCH_WIDTH = 32;
 const SWATCH_HEIGHT = 20;
 const SWATCH_RADIUS = 4;
@@ -67,7 +69,7 @@ export function createColorButton(settings, key) {
         swatch.queue_draw();
     };
     syncFromSettings();
-    settings.connect(`changed::${key}`, syncFromSettings);
+    connectSetting(settings, key, syncFromSettings);
 
     button.connect('clicked', () => openPicker(button, settings, key, rgba));
 

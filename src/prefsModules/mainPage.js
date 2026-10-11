@@ -13,6 +13,7 @@ import {
 
 import { createAboutRow } from './aboutRow.js';
 import { createScaleRow } from './scaleRow.js';
+import { connectSetting } from './settingsHandlers.js';
 
 /**
  * Creates the main preferences page with the layout, language, reset and information groups.
@@ -148,7 +149,7 @@ export function createMainPage(settings, metadata, shellVersion, { pageTitle, pa
             });
         }
 
-        settings.connect('changed::language-mode', () => {
+        connectSetting(settings, 'language-mode', () => {
             const mode = settings.get_enum('language-mode');
             if (shellVersion >= 48) langToggleGroup.set_active(mode);
             else langRow.set_selected(mode);
