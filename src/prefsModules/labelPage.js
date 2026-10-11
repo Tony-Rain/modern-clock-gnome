@@ -10,6 +10,7 @@ import PangoCairo from 'gi://PangoCairo';
 
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
+import { getFontPreviewText } from '../lib/utils.js';
 import { createScaleRow } from './scaleRow.js';
 
 /**
@@ -53,13 +54,11 @@ export function createLabelPage(settings, { pageTitle, pageIcon, keyPrefix }) {
     //#region Font
     const fontRow = new Adw.ActionRow({ title: _('Font') });
 
-    const fontButton = new Gtk.FontDialogButton({
-        dialog: new Gtk.FontDialog({ modal: true }),
-        level: Gtk.FontLevel.FAMILY,
-        font_desc: Pango.FontDescription.from_string('Sans'), // placeholder before the bundled fonts are registered
-        use_font: false, // display fonts like Anurati lack lowercase glyphs
-        valign: Gtk.Align.CENTER,
-    });
+    // A plain button instead of Gtk.FontDialogButton, so the name can be shown in its own font
+    // even for display fonts without lowercase glyphs (see getFontPreviewText)
+    const fontLabel = new Gtk.Label({ ellipsize: Pango.EllipsizeMode.END, max_width_chars: 16 });
+    const fontButton = new Gtk.Button({ child: fontLabel, valign: Gtk.Align.CENTER });
+    const fontDialog = new Gtk.FontDialog({ modal: true });
     const fontResetButton = new Gtk.Button({
         icon_name: 'edit-undo-symbolic',
         tooltip_text: _('Reset to default'),
@@ -69,35 +68,53 @@ export function createLabelPage(settings, { pageTitle, pageIcon, keyPrefix }) {
 
     const defaultFont = settings.get_default_value(keys.font).deep_unpack();
     const fontFamilies = PangoCairo.FontMap.get_default().list_families();
-    const isValidFontFamily = family =>
+    const findFontFamily = family =>
         family
-            ? fontFamilies.some(font => font.get_name().toLowerCase() === family.toLowerCase())
-            : false;
+            ? (fontFamilies.find(font => font.get_name().toLowerCase() === family.toLowerCase()) ??
+              null)
+            : null;
 
-    let syncingFont = false;
+    const showFont = family => {
+        const previewText = getFontPreviewText(family);
+        const attributes = new Pango.AttrList();
+        if (previewText) attributes.insert(Pango.attr_family_new(family));
+        fontLabel.set_attributes(attributes);
+        fontLabel.set_label(previewText ?? family);
+    };
+
     const syncFontFromSettings = () => {
         const font = settings.get_string(keys.font);
-        const desc = Pango.FontDescription.from_string(font);
-        syncingFont = true;
+        const family = Pango.FontDescription.from_string(font).get_family() ?? font;
 
-        if (isValidFontFamily(desc.get_family())) fontButton.set_font_desc(desc);
-        else if (font !== defaultFont) settings.reset(keys.font);
-        // - if the font is registered : safe to display
+        // - if the font is registered: display it
         // - else if it is not the bundled default font: a genuinely invalid value, so reset the key
-        // - else: this is the bundled default font, but not yet registered in the fontMap. Do nothing.
-
+        // - else: this is the bundled default font, not yet registered in the font map. Display
+        //   its name in the default font.
+        if (!findFontFamily(family) && font !== defaultFont) {
+            settings.reset(keys.font);
+            return;
+        }
+        showFont(family);
         fontResetButton.set_visible(font !== defaultFont);
-        syncingFont = false;
     };
     syncFontFromSettings();
 
-    fontButton.connect('notify::font-desc', () => {
-        //syncing from a settings change means no need to set the setting again
-        if (syncingFont) return;
-        const desc = fontButton.get_font_desc();
-        if (!desc) return;
-        settings.set_string(keys.font, desc.to_string());
-        fontResetButton.set_visible(desc.to_string() !== defaultFont);
+    fontButton.connect('clicked', () => {
+        const current = Pango.FontDescription.from_string(settings.get_string(keys.font));
+        fontDialog.choose_family(
+            fontButton.get_root(),
+            findFontFamily(current.get_family()),
+            null,
+            (dialog, result) => {
+                let chosen;
+                try {
+                    chosen = dialog.choose_family_finish(result);
+                } catch {
+                    return; // dialog dismissed
+                }
+                settings.set_string(keys.font, chosen.get_name());
+            }
+        );
     });
     fontResetButton.connect('clicked', () => settings.reset(keys.font));
     settings.connect(`changed::${keys.font}`, syncFontFromSettings);

@@ -21,11 +21,16 @@ export default class ModernClockPreferences extends ExtensionPreferences {
         window.default_width = 360;
         window.default_height = 600;
 
-        // Add path for custom icons
+        // Add paths for custom icons:
+        // - 'assets' for the logo
+        // - 'assets/icons' for the symbolic icons, which GTK only recolors to match the theme
+        //   when they follow the icon theme layout (hicolor/scalable/actions)
         const iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
-        const iconThemePath = GLib.build_filenamev([this.path, 'assets']);
-        if (!iconTheme.get_search_path().includes(iconThemePath))
-            iconTheme.add_search_path(iconThemePath);
+        [['assets'], ['assets', 'icons']].forEach(dirs => {
+            const iconThemePath = GLib.build_filenamev([this.path, ...dirs]);
+            if (!iconTheme.get_search_path().includes(iconThemePath))
+                iconTheme.add_search_path(iconThemePath);
+        });
 
         const settings = this.getSettings();
         const shellVersion = parseFloat(Config.PACKAGE_VERSION);

@@ -6,13 +6,16 @@ import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import Gtk from 'gi://Gtk';
 
-import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import {
+    gettext as _,
+    pgettext,
+} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
 import { createAboutRow } from './aboutRow.js';
 import { createScaleRow } from './scaleRow.js';
 
 /**
- * Creates the main preferences page with the layout, language, information and reset groups.
+ * Creates the main preferences page with the layout, language, reset and information groups.
  *
  * The language group is left out when the LC_TIME language is already English, since all
  * three modes behave the same there.
@@ -157,20 +160,14 @@ export function createMainPage(settings, metadata, shellVersion, { pageTitle, pa
     }
     //#endregion
 
-    //#region About
-    const aboutGroup = new Adw.PreferencesGroup({ title: _('Information') });
-    page.add(aboutGroup);
-
-    const aboutRow = createAboutRow(metadata);
-    aboutGroup.add(aboutRow);
-    //#endregion
-
     //#region Reset
-    const resetGroup = new Adw.PreferencesGroup();
+    const resetGroup = new Adw.PreferencesGroup({
+        title: pgettext('preferences group title', 'Reset'),
+    });
     page.add(resetGroup);
 
     const resetRow = new Adw.ActionRow({
-        title: _('Reset All Settings'),
+        title: _('All Settings'),
         subtitle: _('Restore every setting to its default value'),
     });
     const resetButton = new Gtk.Button({
@@ -197,6 +194,14 @@ export function createMainPage(settings, metadata, shellVersion, { pageTitle, pa
         });
         dialog.present(resetRow);
     });
+    //#endregion
+
+    //#region About
+    const aboutGroup = new Adw.PreferencesGroup({ title: _('Information') });
+    page.add(aboutGroup);
+
+    const aboutRow = createAboutRow(metadata);
+    aboutGroup.add(aboutRow);
     //#endregion
 
     return page;

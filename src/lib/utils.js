@@ -24,25 +24,42 @@ function namesFor(count, format, makeDate) {
             .toUpperCase()
     ).join('');
 }
+// Returns the requested font, or `null` if it is not installed (or not loaded yet), instead of
+// the substitute that Pango would silently pick.
 function loadFont(fontFamily) {
+    const family = fontFamily.replace(/['"\\;{}]/g, '').trim();
     const context = PangoCairo.FontMap.get_default().create_context();
     const desc = new Pango.FontDescription();
-    desc.set_family(fontFamily.replace(/['"\\;{}]/g, '').trim());
+    desc.set_family(family);
     desc.set_size(12 * Pango.SCALE);
-    return context.load_font(desc);
+    const font = context.load_font(desc);
+    if (!font || font.describe().get_family().toLowerCase() !== family.toLowerCase()) return null;
+    return font;
 }
 function coversText(font, text) {
     return [...text].every(ch => IGNORED_RE.test(ch) || font.has_char(ch));
 }
 function getSupport(fontFamily, names) {
     const font = loadFont(fontFamily);
-    const requested = fontFamily
-        .replace(/['"\\;{}]/g, '')
-        .trim()
-        .toLowerCase();
-    if (!font || font.describe().get_family().toLowerCase() !== requested)
-        return { long: false, short: false }; // font not installed (or not loaded yet)
+    if (!font) return { long: false, short: false };
     return { long: coversText(font, names.long), short: coversText(font, names.short) };
+}
+
+/**
+ * Returns the text to use when showing a font family name in that font.
+ *
+ * Display fonts such as Anurati often have no lowercase glyphs, so the uppercase name is tried
+ * next. Returns `null` if the font cannot render its own name, or is not available.
+ *
+ * @param {string} fontFamily - The font family name.
+ * @returns {string|null} The name as given, the name in uppercase, or `null`.
+ */
+export function getFontPreviewText(fontFamily) {
+    const font = loadFont(fontFamily);
+    if (!font) return null;
+    if (coversText(font, fontFamily)) return fontFamily;
+    if (coversText(font, fontFamily.toUpperCase())) return fontFamily.toUpperCase();
+    return null;
 }
 
 /**
