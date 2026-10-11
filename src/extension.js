@@ -5,7 +5,7 @@ import Clutter from 'gi://Clutter';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GnomeDesktop from 'gi://GnomeDesktop';
-import Meta from 'gi://Meta';
+import GObject from 'gi://GObject';
 import Pango from 'gi://Pango';
 import St from 'gi://St';
 
@@ -62,6 +62,50 @@ const RGB_RE = /^rgba?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*(?:,\s*(\
 const FALLBACK_COLOR = 'rgba(255,255,255,1)'; // white
 // -- Font files ---------------------------------------------------------------
 const FONT_FILES = ['Anurati.otf', 'Poppins.ttf'];
+//#endregion
+
+//#region ClockLayout
+// Places the clock inside its holder, which covers the monitor's work area. Doing it in the
+// layout pass itself means a size change (fonts loading, a new letter spacing...) is never drawn
+// for a frame at the old position, and the position is snapped to whole pixels.
+const ClockLayout = GObject.registerClass(
+    { GTypeName: 'ModernClockLayout' },
+    class extends Clutter.LayoutManager {
+        constructor() {
+            super();
+            this._factorX = 0.5;
+            this._factorY = 0.5;
+        }
+
+        setFactors(factorX, factorY) {
+            if (this._factorX === factorX && this._factorY === factorY) return;
+            this._factorX = factorX;
+            this._factorY = factorY;
+            this.layout_changed();
+        }
+
+        vfunc_get_preferred_width(_container, _forHeight) {
+            return [0, 0];
+        }
+
+        vfunc_get_preferred_height(_container, _forWidth) {
+            return [0, 0];
+        }
+
+        vfunc_allocate(container, box) {
+            const [width, height] = box.get_size();
+            container.get_children().forEach(child => {
+                const [, childWidth] = child.get_preferred_width(-1);
+                const [, childHeight] = child.get_preferred_height(childWidth);
+                const x = Math.round(this._factorX * (width - childWidth));
+                const y = Math.round(this._factorY * (height - childHeight));
+                child.allocate(
+                    new Clutter.ActorBox({ x1: x, y1: y, x2: x + childWidth, y2: y + childHeight })
+                );
+            });
+        }
+    }
+);
 //#endregion
 
 export default class ModernClockExtension extends Extension {
@@ -138,7 +182,7 @@ export default class ModernClockExtension extends Extension {
                 this._clockWidgets.forEach(clockWidget => {
                     this._updateClockText(clockWidget);
                     this._updateClockStyle(clockWidget);
-                    this._queuePositionUpdate(clockWidget);
+                    this._updateClockPosition(clockWidget);
                 });
             },
             this
@@ -166,7 +210,7 @@ export default class ModernClockExtension extends Extension {
         // -- Connect to work areas changes ------------------------------------
         global.display.connectObject(
             'workareas-changed',
-            () => this._clockWidgets.forEach(clockWidget => this._queuePositionUpdate(clockWidget)),
+            () => this._clockWidgets.forEach(clockWidget => this._updateClockPosition(clockWidget)),
             this
         );
 
@@ -181,10 +225,7 @@ export default class ModernClockExtension extends Extension {
                 if (this._lastMinute === minute) return;
 
                 this._lastMinute = minute;
-                this._clockWidgets.forEach(clockWidget => {
-                    this._updateClockText(clockWidget);
-                    this._queuePositionUpdate(clockWidget);
-                });
+                this._clockWidgets.forEach(clockWidget => this._updateClockText(clockWidget));
             },
             this
         );
@@ -237,14 +278,8 @@ export default class ModernClockExtension extends Extension {
 
     //#region destroyAllClocks
     _destroyAllClocks() {
-        this._clockWidgets.forEach(clockWidget => {
-            if (clockWidget.positionLaterId) {
-                global.compositor.get_laters().remove(clockWidget.positionLaterId);
-                clockWidget.positionLaterId = null;
-            }
-            clockWidget.disconnectObject(this);
-            clockWidget.destroy();
-        });
+        // Destroying the holder also destroys the clock inside it
+        this._clockWidgets.forEach(clockWidget => clockWidget.holder.destroy());
     }
     //#endregion
 
@@ -261,7 +296,6 @@ export default class ModernClockExtension extends Extension {
         if (this._shellVersion >= 48) container.set_orientation(Clutter.Orientation.VERTICAL);
         else container.set_vertical(true);
         container.monitor = monitor;
-        container.positionLaterId = null;
 
         // Build labels
         container.weekdayLabel = new St.Label();
@@ -275,20 +309,21 @@ export default class ModernClockExtension extends Extension {
             container.add_child(label);
         });
 
-        // Add to layout
-        Main.layoutManager._backgroundGroup.add_child(container);
-
-        // Connect to allocation signal (to cover edge cases not covered by the other signals)
-        container.connectObject(
-            'notify::allocation',
-            () => this._queuePositionUpdate(container),
-            this
-        );
+        // Add to layout, inside a holder covering the work area (see ClockLayout)
+        container.holder = new St.Widget({
+            name: `ModernClockHolder-${monitor.index}`,
+            layout_manager: new ClockLayout(),
+            can_focus: false,
+            reactive: false,
+            track_hover: false,
+        });
+        container.holder.add_child(container);
+        Main.layoutManager._backgroundGroup.add_child(container.holder);
 
         // Setup widget
         this._updateClockText(container);
         this._updateClockStyle(container);
-        this._queuePositionUpdate(container);
+        this._updateClockPosition(container);
 
         return container;
     }
@@ -516,30 +551,12 @@ export default class ModernClockExtension extends Extension {
     //#region updateClockPosition
     _updateClockPosition(clockWidget) {
         const workArea = Main.layoutManager.getWorkAreaForMonitor(clockWidget.monitor.index);
-
-        const positionX = this._settings.get_double('position-x');
-        const positionY = this._settings.get_double('position-y');
-        const [, width] = clockWidget.get_preferred_width(-1);
-        const [, height] = clockWidget.get_preferred_height(-1);
-
-        const x = Math.round(workArea.x + positionX * (workArea.width - width));
-        const y = Math.round(workArea.y + positionY * (workArea.height - height));
-
-        if (clockWidget.x !== x || clockWidget.y !== y) clockWidget.set_position(x, y);
-    }
-    //#endregion
-
-    //#region queuePositionUpdate
-    _queuePositionUpdate(clockWidget) {
-        if (clockWidget.positionLaterId) return;
-
-        clockWidget.positionLaterId = global.compositor
-            .get_laters()
-            .add(Meta.LaterType.BEFORE_REDRAW, () => {
-                clockWidget.positionLaterId = null;
-                this._updateClockPosition(clockWidget);
-                return GLib.SOURCE_REMOVE;
-            });
+        clockWidget.holder.set_position(workArea.x, workArea.y);
+        clockWidget.holder.set_size(workArea.width, workArea.height);
+        clockWidget.holder.layout_manager.setFactors(
+            this._settings.get_double('position-x'),
+            this._settings.get_double('position-y')
+        );
     }
     //#endregion
 
