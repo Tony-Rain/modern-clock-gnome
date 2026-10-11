@@ -179,26 +179,7 @@ export default class ModernClockExtension extends Extension {
         }
 
         // -- Connect to settings changes --------------------------------------
-        this._settings.connectObject(
-            'changed',
-            (s_, key) => {
-                if (key === 'weekday-font')
-                    this._fontsSupport.weekday = getWeekdayFontSupport(
-                        this._settings.get_string('weekday-font')
-                    );
-                if (key === 'date-font')
-                    this._fontsSupport.date = getMonthFontSupport(
-                        this._settings.get_string('date-font')
-                    );
-
-                this._clockWidgets.forEach(clockWidget => {
-                    this._updateClockText(clockWidget);
-                    this._updateClockStyle(clockWidget);
-                    this._updateClockPosition(clockWidget);
-                });
-            },
-            this
-        );
+        this._settings.connectObject('changed', (s_, key) => this._onSettingChanged(key), this);
 
         // -- Connect to theme changes -----------------------------------------
         this._themeContext.connectObject(
@@ -273,6 +254,56 @@ export default class ModernClockExtension extends Extension {
         this._lastMonitorSnapshot = null;
         this._lastMinute = null;
         this._logger = null;
+    }
+    //#endregion
+
+    //#region onSettingChanged
+    // Only updates what depends on the key, so that e.g. dragging a position slider doesn't
+    // rebuild the text and style of every line on every step
+    _onSettingChanged(key) {
+        // Keys of a line are '<line>-<suffix>', e.g. 'weekday-font'
+        const suffix = key.replace(/^(weekday|date|time)-/, '');
+
+        let update;
+        switch (suffix) {
+            case 'position-x':
+            case 'position-y':
+                update = clockWidget => this._updateClockPosition(clockWidget);
+                break;
+            case 'language-mode':
+            case 'format':
+            case 'decorations':
+                update = clockWidget => this._updateClockText(clockWidget);
+                break;
+            case 'font':
+                // The font decides whether 'auto' language mode falls back to English
+                if (key === 'weekday-font')
+                    this._fontsSupport.weekday = getWeekdayFontSupport(
+                        this._settings.get_string(key)
+                    );
+                if (key === 'date-font')
+                    this._fontsSupport.date = getMonthFontSupport(this._settings.get_string(key));
+                update = clockWidget => {
+                    this._updateClockText(clockWidget);
+                    this._updateClockStyle(clockWidget);
+                };
+                break;
+            case 'enabled':
+            case 'size-scale':
+            case 'tracking-scale':
+            case 'color':
+            case 'color-enabled':
+                update = clockWidget => this._updateClockStyle(clockWidget);
+                break;
+            default:
+                // A key not listed above: update everything to be safe
+                update = clockWidget => {
+                    this._updateClockText(clockWidget);
+                    this._updateClockStyle(clockWidget);
+                    this._updateClockPosition(clockWidget);
+                };
+        }
+        this._clockWidgets.forEach(update);
     }
     //#endregion
 
