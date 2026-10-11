@@ -67,7 +67,7 @@ const FONT_FILES = ['Anurati.otf', 'Poppins.ttf'];
 //#region ClockLayout
 // Places the clock inside its holder, which covers the monitor's work area. Doing it in the
 // layout pass itself means a size change (fonts loading, a new letter spacing...) is never drawn
-// for a frame at the old position, and the position is snapped to whole pixels.
+// for a frame at the old position.
 const ClockLayout = GObject.registerClass(
     { GTypeName: 'ModernClockLayout' },
     class extends Clutter.LayoutManager {
@@ -95,12 +95,18 @@ const ClockLayout = GObject.registerClass(
         vfunc_allocate(container, box) {
             const [width, height] = box.get_size();
             container.get_children().forEach(child => {
-                const [, childWidth] = child.get_preferred_width(-1);
-                const [, childHeight] = child.get_preferred_height(childWidth);
-                const x = Math.round(this._factorX * (width - childWidth));
-                const y = Math.round(this._factorY * (height - childHeight));
+                // The clock spans the whole width of the holder, and its lines are centered inside
+                // it. That way, the position of a line never depends on the width of another one
+                // (e.g. the date doesn't move when the weekday letter spacing changes), and it is
+                // rounded only once. Off-center positions shift the whole span, still with a
+                // single rounding.
+                const [, blockWidth] = child.get_preferred_width(-1);
+                const [, blockHeight] = child.get_preferred_height(width);
+                const center = this._factorX * width + (0.5 - this._factorX) * blockWidth;
+                const x = Math.round(center - width / 2);
+                const y = Math.round(this._factorY * (height - blockHeight));
                 child.allocate(
-                    new Clutter.ActorBox({ x1: x, y1: y, x2: x + childWidth, y2: y + childHeight })
+                    new Clutter.ActorBox({ x1: x, y1: y, x2: x + width, y2: y + blockHeight })
                 );
             });
         }
@@ -518,21 +524,30 @@ export default class ModernClockExtension extends Extension {
 
     //#region getThemeColor
     _getThemeColor() {
-        const candidates = ['calendar-today', 'button default', 'osd-monitor-label'];
-        // Items that commonly get an accent color from custom themes
-        // - 'calendar-today': highlight for the current day in the GNOME calendar
-        // - 'button default': default action button
-        // - 'osd-monitor-label': number overlaid on each display when rearranging them in Settings;
+        // Items that commonly get an accent color from custom themes, each given as the chain of
+        // style classes from the outermost ancestor down, so that descendant selectors such as
+        // `.calendar .calendar-day.calendar-today` match the probe as they match the real widget
+        // - calendar-today: highlight for the current day in the GNOME calendar
+        // - button default: default action button
+        // - osd-monitor-label: number overlaid on each display when rearranging them in Settings;
         //   rarely overridden, so usually still carries '-st-accent-color' as a fallback
+        const candidates = [
+            ['calendar', 'calendar-day calendar-today'],
+            ['button default'],
+            ['osd-monitor-label'],
+        ];
 
         let color = null;
         let found = false;
-        for (const styleClass of candidates) {
-            const dummy = new St.Widget({ style_class: styleClass });
-            global.stage.add_child(dummy);
-            color = dummy.get_theme_node().get_background_color();
-            global.stage.remove_child(dummy);
-            dummy.destroy();
+        for (const styleClasses of candidates) {
+            const probes = styleClasses.map(
+                styleClass => new St.Widget({ style_class: styleClass })
+            );
+            for (let i = 1; i < probes.length; i++) probes[i - 1].add_child(probes[i]);
+            global.stage.add_child(probes[0]);
+            color = probes.at(-1).get_theme_node().get_background_color();
+            global.stage.remove_child(probes[0]);
+            probes[0].destroy(); // also destroys the nested probes
 
             if (
                 color.alpha > 0 && // Color is visible
