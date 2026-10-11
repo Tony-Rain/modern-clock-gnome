@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Modern Clock for GNOME\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-09 13:49+0100\n"
+"POT-Creation-Date: 2026-10-11 21:41+0300\n"
 "PO-Revision-Date: 2026-10-09 13:50+0100\n"
 "Last-Translator: Djinn Alexio <djinnalexio+gnome@proton.me>\n"
 "Language-Team: French\n"
@@ -62,8 +62,8 @@ msgid "24-hour"
 msgstr "24 heures"
 
 #: src/prefs.js:162 src/prefs.js:171
-msgid "AM / PM"
-msgstr "AM / PM"
+msgid "12-hour"
+msgstr "12 heures"
 
 #: src/prefsModules/aboutRow.js:43
 msgid "About Modern Clock"
