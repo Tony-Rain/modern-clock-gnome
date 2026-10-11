@@ -576,6 +576,11 @@ export default class ModernClockExtension extends Extension {
 
     //#region updateClockPosition
     _updateClockPosition(clockWidget) {
+        // When a monitor is unplugged, 'workareas-changed' can come before the clocks are rebuilt
+        // on 'monitors-changed', while the clock still has the index of a monitor that is gone.
+        // The check uses Mutter's count, since Main.layoutManager.monitors is not updated yet.
+        if (clockWidget.monitor.index >= global.display.get_n_monitors()) return;
+
         const workArea = Main.layoutManager.getWorkAreaForMonitor(clockWidget.monitor.index);
         clockWidget.holder.set_position(workArea.x, workArea.y);
         clockWidget.holder.set_size(workArea.width, workArea.height);
