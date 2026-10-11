@@ -19,11 +19,13 @@ import { getMonthFontSupport, getWeekdayFontSupport } from './lib/utils.js';
 //#region Constants
 // -- Base dimensions for 1080p ------------------------------------------------
 const BASE_HEIGHT = 1080;
-const BASE_SIZE = 48;
-const BASE_LS = 16;
-const BASE_PADDING_TOP_WEEKDAY = 0;
-const BASE_PADDING_TOP_DATE = 2;
-const BASE_PADDING_TOP_TIME = 1;
+// Size, letter spacing and top padding of each line in px, with the sliders in their default
+// middle position (scale 1.0)
+const BASE_DIMENSIONS = {
+    weekday: { size: 96, letterSpacing: 21, paddingTop: 0 },
+    date: { size: 24, letterSpacing: 4, paddingTop: 1 },
+    time: { size: 24, letterSpacing: 4, paddingTop: 0.5 },
+};
 // SCALE_MIN * SCALE_MAX = 1 so that slider=0.5 can give scale=1.0
 const SCALE_MIN = 0.25;
 const SCALE_MAX = 4;
@@ -441,7 +443,7 @@ export default class ModernClockExtension extends Extension {
                     fontFace: this._settings.get_string('weekday-font'),
                     sizeScale: this._settings.get_double('weekday-size-scale'),
                     letterSpacingScale: this._settings.get_double('weekday-tracking-scale'),
-                    basePaddingTop: BASE_PADDING_TOP_WEEKDAY,
+                    base: BASE_DIMENSIONS.weekday,
                     color: this._settings.get_string('weekday-color'),
                     colorEnabled: this._settings.get_boolean('weekday-color-enabled'),
                 })
@@ -453,7 +455,7 @@ export default class ModernClockExtension extends Extension {
                     fontFace: this._settings.get_string('date-font'),
                     sizeScale: this._settings.get_double('date-size-scale'),
                     letterSpacingScale: this._settings.get_double('date-tracking-scale'),
-                    basePaddingTop: BASE_PADDING_TOP_DATE,
+                    base: BASE_DIMENSIONS.date,
                     color: this._settings.get_string('date-color'),
                     colorEnabled: this._settings.get_boolean('date-color-enabled'),
                 })
@@ -465,7 +467,7 @@ export default class ModernClockExtension extends Extension {
                     fontFace: this._settings.get_string('time-font'),
                     sizeScale: this._settings.get_double('time-size-scale'),
                     letterSpacingScale: this._settings.get_double('time-tracking-scale'),
-                    basePaddingTop: BASE_PADDING_TOP_TIME,
+                    base: BASE_DIMENSIONS.time,
                     color: this._settings.get_string('time-color'),
                     colorEnabled: this._settings.get_boolean('time-color-enabled'),
                 })
@@ -477,18 +479,18 @@ export default class ModernClockExtension extends Extension {
     //#region createLabelStyle
     _createLabelStyle(
         monitorScale,
-        { fontFace, sizeScale, letterSpacingScale, basePaddingTop, color, colorEnabled }
+        { fontFace, sizeScale, letterSpacingScale, base, color, colorEnabled }
     ) {
         const safeFontFace = fontFace.replace(/['"\\;{}]/g, '').trim();
 
-        const computePx = (base, sliderValue) => {
+        const computePx = (px, sliderValue) => {
             const userScale = SCALE_MIN * Math.pow(SCALE_MAX / SCALE_MIN, sliderValue);
             const scale = monitorScale * userScale;
-            return Math.round(base * scale);
+            return Math.round(px * scale);
         };
-        const fontSize = computePx(BASE_SIZE, sizeScale);
-        const letterSpacing = computePx(BASE_LS, letterSpacingScale);
-        const paddingTop = computePx(basePaddingTop, sizeScale);
+        const fontSize = computePx(base.size, sizeScale);
+        const letterSpacing = computePx(base.letterSpacing, letterSpacingScale);
+        const paddingTop = computePx(base.paddingTop, sizeScale);
 
         const sanitizeColor = value => {
             if (typeof value !== 'string') return FALLBACK_COLOR;
