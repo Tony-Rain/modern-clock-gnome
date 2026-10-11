@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Modern Clock for GNOME\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-11 21:41+0300\n"
+"POT-Creation-Date: 2026-10-11 22:55+0300\n"
 "PO-Revision-Date: 2026-10-09 13:49+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -218,3 +218,27 @@ msgstr "Режим"
 #: src/prefsModules/mainPage.js:161
 msgid "Information"
 msgstr "Информация"
+
+#: src/prefsModules/mainPage.js:173
+msgid "Reset All Settings"
+msgstr "Сбросить все настройки"
+
+#: src/prefsModules/mainPage.js:174
+msgid "Restore every setting to its default value"
+msgstr "Вернуть всем настройкам значения по умолчанию"
+
+#: src/prefsModules/mainPage.js:177 src/prefsModules/mainPage.js:190
+msgid "Reset"
+msgstr "Сбросить"
+
+#: src/prefsModules/mainPage.js:186
+msgid "Reset All Settings?"
+msgstr "Сбросить все настройки?"
+
+#: src/prefsModules/mainPage.js:187
+msgid "Every setting of Modern Clock will be restored to its default value."
+msgstr "Все настройки Modern Clock вернутся к значениям по умолчанию."
+
+#: src/prefsModules/mainPage.js:189
+msgid "Cancel"
+msgstr "Отмена"

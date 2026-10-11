@@ -12,7 +12,7 @@ import { createAboutRow } from './aboutRow.js';
 import { createScaleRow } from './scaleRow.js';
 
 /**
- * Creates the main preferences page with the layout, language and information groups.
+ * Creates the main preferences page with the layout, language, information and reset groups.
  *
  * The language group is left out when the LC_TIME language is already English, since all
  * three modes behave the same there.
@@ -163,6 +163,40 @@ export function createMainPage(settings, metadata, shellVersion, { pageTitle, pa
 
     const aboutRow = createAboutRow(metadata);
     aboutGroup.add(aboutRow);
+    //#endregion
+
+    //#region Reset
+    const resetGroup = new Adw.PreferencesGroup();
+    page.add(resetGroup);
+
+    const resetRow = new Adw.ActionRow({
+        title: _('Reset All Settings'),
+        subtitle: _('Restore every setting to its default value'),
+    });
+    const resetButton = new Gtk.Button({
+        label: _('Reset'),
+        valign: Gtk.Align.CENTER,
+        css_classes: ['destructive-action'],
+    });
+    resetRow.add_suffix(resetButton);
+    resetGroup.add(resetRow);
+
+    resetButton.connect('clicked', () => {
+        const dialog = new Adw.AlertDialog({
+            heading: _('Reset All Settings?'),
+            body: _('Every setting of Modern Clock will be restored to its default value.'),
+        });
+        dialog.add_response('cancel', _('Cancel'));
+        dialog.add_response('reset', _('Reset'));
+        dialog.set_response_appearance('reset', Adw.ResponseAppearance.DESTRUCTIVE);
+        dialog.set_default_response('cancel');
+        dialog.set_close_response('cancel');
+        dialog.connect('response', (dialog_, response) => {
+            if (response === 'reset')
+                settings.settings_schema.list_keys().forEach(key => settings.reset(key));
+        });
+        dialog.present(resetRow);
+    });
     //#endregion
 
     return page;
