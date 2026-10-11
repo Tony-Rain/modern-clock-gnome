@@ -8,7 +8,7 @@
 XDG_DATA_HOME ?= $(HOME)/.local/share
 
 UUID := $(shell jq -r ".uuid" src/metadata.json)
-ZIP := dist/$(UUID).shell-extension.zip
+ZIP := dist/modernclock.zip
 DCONF_DIR := /org/gnome/shell/extensions/modernclock/
 FONTS_DIR := $(XDG_DATA_HOME)/fonts/modernclock
 
@@ -20,6 +20,7 @@ pack:
 	@mkdir -p dist
 	gnome-extensions pack --force ./src --extra-source=../LICENSE --extra-source=assets \
 	--extra-source=fonts --extra-source=lib --extra-source=prefsModules --out-dir=dist
+	mv -f dist/$(UUID).shell-extension.zip $(ZIP)
 	@echo "✓ Extension bundle: $(ZIP)"
 
 clean:
