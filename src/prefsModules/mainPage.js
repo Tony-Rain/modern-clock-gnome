@@ -12,6 +12,7 @@ import {
 } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
 import { createAboutRow } from './aboutRow.js';
+import { createEnumRow } from './enumRow.js';
 import { createScaleRow } from './scaleRow.js';
 import { connectSetting } from './settingsHandlers.js';
 
@@ -23,13 +24,12 @@ import { connectSetting } from './settingsHandlers.js';
  *
  * @param {Gio.Settings} settings - The settings object for this extension.
  * @param {ExtensionMetadata} metadata - The metadata object from metadata.json.
- * @param {number} shellVersion - The GNOME Shell version.
  * @param {object} options - The page configuration.
  * @param {string} options.pageTitle - The page title.
  * @param {string} options.pageIcon - The icon name for the page.
  * @returns {Adw.PreferencesPage} The page ready to add to the preferences window.
  */
-export function createMainPage(settings, metadata, shellVersion, { pageTitle, pageIcon }) {
+export function createMainPage(settings, metadata, { pageTitle, pageIcon }) {
     const page = new Adw.PreferencesPage({
         title: pageTitle,
         icon_name: pageIcon,
@@ -91,7 +91,6 @@ export function createMainPage(settings, metadata, shellVersion, { pageTitle, pa
                 hint: _('Use English.'),
             },
         ];
-        const currentMode = settings.get_enum('language-mode');
 
         // Subtitle/Hint
         const langSubRow = new Adw.PreferencesRow({ activatable: false });
@@ -105,55 +104,18 @@ export function createMainPage(settings, metadata, shellVersion, { pageTitle, pa
             margin_bottom: 8,
             css_classes: ['subtitle'],
         });
-        const updateLangSub = keyIndex => langSubLabel.set_label(langModes[keyIndex].hint);
+        const updateLangSub = () =>
+            langSubLabel.set_label(langModes[settings.get_enum('language-mode')].hint);
+        updateLangSub();
+        connectSetting(settings, 'language-mode', updateLangSub);
         langSubRow.set_child(langSubLabel);
 
         // Language Toggle
-        let langRow;
-        let langToggleGroup;
-        if (shellVersion >= 48) {
-            langRow = new Adw.PreferencesRow({
-                title: _('Mode'),
-                activatable: false,
-            });
-
-            langToggleGroup = new Adw.ToggleGroup({
-                valign: Gtk.Align.CENTER,
-                homogeneous: true,
-                margin_start: 12,
-                margin_end: 12,
-                margin_top: 8,
-                margin_bottom: 8,
-            });
-            langModes.forEach(mode => langToggleGroup.add(new Adw.Toggle({ label: mode.label })));
-            langToggleGroup.set_active(currentMode);
-            updateLangSub(currentMode);
-
-            langToggleGroup.connect('notify::active', () => {
-                const index = langToggleGroup.get_active();
-                settings.set_enum('language-mode', index);
-                updateLangSub(index);
-            });
-
-            langRow.set_child(langToggleGroup);
-        } else {
-            langRow = new Adw.ComboRow({
-                title: _('Mode'),
-                model: Gtk.StringList.new(langModes.map(mode => mode.label)),
-                selected: settings.get_enum('language-mode'),
-            });
-            updateLangSub(currentMode);
-            langRow.connect('notify::selected', () => {
-                settings.set_enum('language-mode', langRow.get_selected());
-                updateLangSub(langRow.get_selected());
-            });
-        }
-
-        connectSetting(settings, 'language-mode', () => {
-            const mode = settings.get_enum('language-mode');
-            if (shellVersion >= 48) langToggleGroup.set_active(mode);
-            else langRow.set_selected(mode);
-            updateLangSub(mode);
+        const langRow = createEnumRow(settings, {
+            title: _('Mode'),
+            key: 'language-mode',
+            labels: langModes.map(mode => mode.label),
+            wide: true,
         });
 
         langGroup.add(langRow);

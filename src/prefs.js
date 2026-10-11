@@ -11,8 +11,8 @@ import {
     ExtensionPreferences,
     gettext as _,
 } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
-import * as Config from 'resource:///org/gnome/Shell/Extensions/js/misc/config.js';
 
+import { createEnumRow } from './prefsModules/enumRow.js';
 import { createLabelPage } from './prefsModules/labelPage.js';
 import { createMainPage } from './prefsModules/mainPage.js';
 import { connectSetting, disconnectSettings } from './prefsModules/settingsHandlers.js';
@@ -45,7 +45,6 @@ export default class ModernClockPreferences extends ExtensionPreferences {
         }
 
         const settings = this.getSettings();
-        const shellVersion = parseFloat(Config.PACKAGE_VERSION);
 
         // The preferences process can outlive the window (see connectSetting)
         window.connect('close-request', () => {
@@ -55,7 +54,7 @@ export default class ModernClockPreferences extends ExtensionPreferences {
 
         //#region Main page
         window.add(
-            createMainPage(settings, this.metadata, shellVersion, {
+            createMainPage(settings, this.metadata, {
                 pageTitle: _('General'),
                 pageIcon: 'org.gnome.Settings-symbolic',
             })
@@ -85,43 +84,13 @@ export default class ModernClockPreferences extends ExtensionPreferences {
         //#region Weekday format row
         const weekdayFormatGroup = new Adw.PreferencesGroup();
         weekdayPage.add(weekdayFormatGroup);
-
-        let weekdayFormatRow;
-        let weekdayFormatToggleGroup;
-        if (shellVersion >= 48) {
-            weekdayFormatRow = new Adw.ActionRow({ title: _('Format') });
-            weekdayFormatToggleGroup = new Adw.ToggleGroup({
-                valign: Gtk.Align.CENTER,
-                homogeneous: true,
-            });
-            // weekday-format: 0 = 'long', 1 = 'short'
-            weekdayFormatToggleGroup.add(new Adw.Toggle({ label: _('Full'), name: 'long' }));
-            weekdayFormatToggleGroup.add(
-                new Adw.Toggle({ label: _('Abbreviated'), name: 'short' })
-            );
-            weekdayFormatToggleGroup.set_active(settings.get_enum('weekday-format'));
-            weekdayFormatRow.add_suffix(weekdayFormatToggleGroup);
-            weekdayFormatToggleGroup.connect('notify::active', () =>
-                settings.set_enum('weekday-format', weekdayFormatToggleGroup.get_active())
-            );
-        } else {
-            weekdayFormatRow = new Adw.ComboRow({
+        weekdayFormatGroup.add(
+            createEnumRow(settings, {
                 title: _('Format'),
-                model: Gtk.StringList.new([_('Full'), _('Abbreviated')]),
-                selected: settings.get_enum('weekday-format'),
-            });
-            weekdayFormatRow.connect('notify::selected', widget =>
-                settings.set_enum('weekday-format', widget.get_selected())
-            );
-        }
-
-        connectSetting(settings, 'weekday-format', () => {
-            const mode = settings.get_enum('weekday-format');
-            if (shellVersion >= 48) weekdayFormatToggleGroup.set_active(mode);
-            else weekdayFormatRow.set_selected(mode);
-        });
-
-        weekdayFormatGroup.add(weekdayFormatRow);
+                key: 'weekday-format', // 0 = 'long', 1 = 'short'
+                labels: [_('Full'), _('Abbreviated')],
+            })
+        );
         //#endregion
 
         //#region Date format row
@@ -171,41 +140,13 @@ export default class ModernClockPreferences extends ExtensionPreferences {
         //#region Time format row
         const timeFormatGroup = new Adw.PreferencesGroup();
         timePage.add(timeFormatGroup);
-
-        let timeFormatRow;
-        let timeFormatToggleGroup;
-        if (shellVersion >= 48) {
-            timeFormatRow = new Adw.ActionRow({ title: _('Format') });
-            timeFormatToggleGroup = new Adw.ToggleGroup({
-                valign: Gtk.Align.CENTER,
-                homogeneous: true,
-            });
-            // time-format: 0 = '24h', 1 = '12h'
-            timeFormatToggleGroup.add(new Adw.Toggle({ label: _('24-hour'), name: '24h' }));
-            timeFormatToggleGroup.add(new Adw.Toggle({ label: _('12-hour'), name: '12h' }));
-            timeFormatToggleGroup.set_active(settings.get_enum('time-format'));
-            timeFormatRow.add_suffix(timeFormatToggleGroup);
-            timeFormatToggleGroup.connect('notify::active', () =>
-                settings.set_enum('time-format', timeFormatToggleGroup.get_active())
-            );
-        } else {
-            timeFormatRow = new Adw.ComboRow({
+        timeFormatGroup.add(
+            createEnumRow(settings, {
                 title: _('Format'),
-                model: Gtk.StringList.new([_('24-hour'), _('12-hour')]),
-                selected: settings.get_enum('time-format'),
-            });
-            timeFormatRow.connect('notify::selected', widget =>
-                settings.set_enum('time-format', widget.get_selected())
-            );
-        }
-
-        connectSetting(settings, 'time-format', () => {
-            const mode = settings.get_enum('time-format');
-            if (shellVersion >= 48) timeFormatToggleGroup.set_active(mode);
-            else timeFormatRow.set_selected(mode);
-        });
-
-        timeFormatGroup.add(timeFormatRow);
+                key: 'time-format', // 0 = '24h', 1 = '12h'
+                labels: [_('24-hour'), _('12-hour')],
+            })
+        );
         //#endregion
     }
 }
