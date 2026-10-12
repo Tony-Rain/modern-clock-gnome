@@ -16,7 +16,7 @@ import { createEnumRow } from './prefsModules/enumRow.js';
 import { createLabelPage } from './prefsModules/labelPage.js';
 import { createMainPage } from './prefsModules/mainPage.js';
 import { connectSetting, disconnectSettings } from './prefsModules/settingsHandlers.js';
-import { getMonthFontSupport, registerBundledFonts } from './lib/utils.js';
+import { getMonthFontSupport, registerBundledFonts, toTimeLocaleUpperCase } from './lib/utils.js';
 
 export default class ModernClockPreferences extends ExtensionPreferences {
     fillPreferencesWindow(window) {
@@ -115,10 +115,10 @@ export default class ModernClockPreferences extends ExtensionPreferences {
                 exampleDate.format('%m/%d/%Y'),
                 en || (auto && !mfs.short)
                     ? '01 SEP 2026'
-                    : exampleDate.format('%d %b %Y').toUpperCase(),
+                    : toTimeLocaleUpperCase(exampleDate.format('%d %b %Y')),
                 en || (auto && !mfs.long)
                     ? '01 SEPTEMBER 2026'
-                    : exampleDate.format('%d %B %Y').toUpperCase(),
+                    : toTimeLocaleUpperCase(exampleDate.format('%d %B %Y')),
             ];
             dateFormatRow.model.splice(0, dateFormatRow.model.get_n_items(), strings);
         };

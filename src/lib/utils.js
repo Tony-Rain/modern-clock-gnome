@@ -5,6 +5,20 @@ import GLib from 'gi://GLib';
 import Pango from 'gi://Pango';
 import PangoCairo from 'gi://PangoCairo';
 
+// The locale of the date and time names (LC_TIME, which GLib.DateTime.format() follows), as a
+// BCP 47 tag, e.g. "tr_TR.UTF-8" -> "tr-TR". `undefined` (the JS default locale) if it has none,
+// e.g. "C".
+const TIME_LOCALE = GLib.get_language_names_with_category('LC_TIME')
+    .map(name => name.replace(/[.@].*$/, '').replace('_', '-'))
+    .find(tag => {
+        try {
+            Intl.getCanonicalLocales(tag);
+            return true;
+        } catch {
+            return false;
+        }
+    });
+
 const WEEKDAY_NAMES = {
     long: namesFor(7, '%A', d => GLib.DateTime.new_local(2024, 1, d, 0, 0, 0)),
     short: namesFor(7, '%a', d => GLib.DateTime.new_local(2024, 1, d, 0, 0, 0)),
@@ -22,11 +36,20 @@ export const FONT_FILES = { 'Anurati.otf': 'Anurati', 'Poppins.ttf': 'Poppins' }
 
 function namesFor(count, format, makeDate) {
     return Array.from({ length: count }, (v_, i) =>
-        makeDate(i + 1)
-            .format(format)
-            .toUpperCase()
+        toTimeLocaleUpperCase(makeDate(i + 1).format(format))
     ).join('');
 }
+/**
+ * Converts date or time text to uppercase following the rules of its language, e.g. Turkish
+ * "pazartesi" -> "PAZARTESİ" (a plain toUpperCase() gives "PAZARTESI").
+ *
+ * @param {string} text - Text formatted by GLib.DateTime.format().
+ * @returns {string} The text in uppercase.
+ */
+export function toTimeLocaleUpperCase(text) {
+    return text.toLocaleUpperCase(TIME_LOCALE);
+}
+
 /**
  * Removes the characters that could break out of a quoted CSS font-family value.
  *

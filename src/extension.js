@@ -23,6 +23,7 @@ import {
     migrateFontKey,
     registerBundledFonts,
     sanitizeFontFamily,
+    toTimeLocaleUpperCase,
 } from './lib/utils.js';
 
 //#region Constants
@@ -400,11 +401,11 @@ export default class ModernClockExtension extends Extension {
         if (weekdayFormat === 'long') {
             weekday = useEnglishWeekday
                 ? EN_WEEKDAY_NAMES.long[now.get_day_of_week() - 1]
-                : now.format('%A').toUpperCase();
+                : toTimeLocaleUpperCase(now.format('%A'));
         } else {
             weekday = useEnglishWeekday
                 ? EN_WEEKDAY_NAMES.short[now.get_day_of_week() - 1]
-                : now.format('%a').toUpperCase();
+                : toTimeLocaleUpperCase(now.format('%a'));
         }
 
         // Date
@@ -419,7 +420,7 @@ export default class ModernClockExtension extends Extension {
             case 'long':
                 date = useEnglishDate
                     ? now.format(`%d ${EN_MONTH_NAMES.long[now.get_month() - 1]} %Y`)
-                    : now.format('%d %B %Y').toUpperCase();
+                    : toTimeLocaleUpperCase(now.format('%d %B %Y'));
                 break;
             case 'numeric':
                 date = now.format('%d.%m.%Y');
@@ -431,7 +432,7 @@ export default class ModernClockExtension extends Extension {
             default:
                 date = useEnglishDate
                     ? now.format(`%d ${EN_MONTH_NAMES.short[now.get_month() - 1]} %Y`)
-                    : now.format('%d %b %Y').toUpperCase();
+                    : toTimeLocaleUpperCase(now.format('%d %b %Y'));
                 break;
         }
 
