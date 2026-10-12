@@ -215,8 +215,8 @@ export default class ModernClockExtension extends Extension {
         this._wallClock.connectObject(
             'notify::clock',
             () => {
-                const now = GLib.DateTime.new_now_local();
-                const minute = now.get_hour() * 60 + now.get_minute();
+                // the date is included, for a resume from suspend at the same time the next day
+                const minute = GLib.DateTime.new_now_local().format('%F %R');
                 if (this._lastMinute === minute) return;
 
                 this._lastMinute = minute;
