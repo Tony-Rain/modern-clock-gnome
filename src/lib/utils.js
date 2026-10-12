@@ -58,10 +58,16 @@ function getSupport(fontFamily, names) {
     return { long: coversText(font, names.long), short: coversText(font, names.short) };
 }
 
+// Font maps the bundled fonts were loaded into. The module lives as long as the process, so
+// this keeps every enable (e.g. after each screen unlock) from loading them again.
+const fontMapsWithBundledFonts = new WeakSet();
+
 /**
  * Loads the bundled fonts straight from their files into the given font maps, so they can be used
- * right away without being installed. Fonts a map already provides are skipped, so calling this
- * again (e.g. on every enable) doesn't add them twice.
+ * right away without being installed. Each map is only loaded once per process.
+ *
+ * The fonts are loaded even when a map already provides their family, e.g. from copies made by an
+ * older version: from Pango 1.56.4, loaded faces replace the existing ones with the same name.
  *
  * Needs `Pango.FontMap.add_font_file()`, added in Pango 1.56 (GNOME 48).
  *
@@ -73,13 +79,24 @@ function getSupport(fontFamily, names) {
 export function registerBundledFonts(fontsDir, fontMaps) {
     if (!fontMaps.every(fontMap => typeof fontMap.add_font_file === 'function')) return false;
 
-    new Set(fontMaps).forEach(fontMap =>
-        Object.entries(FONT_FILES).forEach(([fileName, family]) => {
-            if (!fontMap.get_family(family))
-                fontMap.add_font_file(GLib.build_filenamev([fontsDir, fileName]));
-        })
-    );
+    new Set(fontMaps).forEach(fontMap => {
+        if (fontMapsWithBundledFonts.has(fontMap)) return;
+        Object.keys(FONT_FILES).forEach(fileName =>
+            fontMap.add_font_file(GLib.build_filenamev([fontsDir, fileName]))
+        );
+        fontMapsWithBundledFonts.add(fontMap);
+    });
     return true;
+}
+
+/**
+ * Checks whether loading a font file replaces the faces a font map already has with the same name.
+ * Before Pango 1.56.4, the file is added next to them and either one may be used.
+ *
+ * @returns {boolean} `true` if loaded fonts replace the existing ones.
+ */
+export function loadedFontsReplaceExisting() {
+    return Pango.version_check(1, 56, 4) === null;
 }
 
 /**

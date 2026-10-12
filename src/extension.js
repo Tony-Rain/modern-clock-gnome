@@ -19,6 +19,7 @@ import {
     FONT_FILES,
     getMonthFontSupport,
     getWeekdayFontSupport,
+    loadedFontsReplaceExisting,
     registerBundledFonts,
     sanitizeFontFamily,
 } from './lib/utils.js';
@@ -613,7 +614,10 @@ export default class ModernClockExtension extends Extension {
                 PangoCairo.FontMap.get_default(), // used by the font support checks
             ];
             if (registerBundledFonts(bundledDir.get_path(), fontMaps)) {
-                this._removeCopiedFonts(userDir);
+                // Copies that exist now were loaded at session start. Before Pango 1.56.4 they may
+                // still be the ones in use, and deleting them would draw the clock in missing glyphs
+                // until the next session.
+                if (loadedFontsReplaceExisting()) this._removeCopiedFonts(userDir);
                 return;
             }
         } catch (e) {
