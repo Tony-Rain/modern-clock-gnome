@@ -178,22 +178,28 @@ export function createLabelPage(settings, { pageTitle, pageIcon, keyPrefix }) {
             })
     );
 
+    let syncingDeco = false;
     const syncDecoFromSettings = () => {
         const stored = settings.get_strv(keys.deco);
+        syncingDeco = true;
         decoEntries.forEach((entry, i) => {
             const value = typeof stored[i] === 'string' ? stored[i] : '';
             if (entry.get_text() !== value) entry.set_text(value);
         });
+        syncingDeco = false;
     };
     syncDecoFromSettings();
 
     decoEntries.forEach(entry =>
-        entry.connect('notify::text', () =>
+        entry.connect('notify::text', () => {
+            // syncing from a settings change: writing back would store the entries half-updated,
+            // and turn a reset key into a set one
+            if (syncingDeco) return;
             settings.set_strv(
                 keys.deco,
                 decoEntries.map(e => e.get_text())
-            )
-        )
+            );
+        })
     );
     connectSetting(settings, keys.deco, syncDecoFromSettings);
 

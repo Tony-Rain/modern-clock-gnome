@@ -125,9 +125,11 @@ export default class ModernClockPreferences extends ExtensionPreferences {
         updateFormatExampleList();
 
         dateFormatRow.set_selected(settings.get_enum('date-format'));
-        dateFormatRow.connect('notify::selected', () =>
-            settings.set_enum('date-format', dateFormatRow.get_selected())
-        );
+        dateFormatRow.connect('notify::selected', () => {
+            // skips the write when the row only follows a settings change (see createEnumRow)
+            const index = dateFormatRow.get_selected();
+            if (settings.get_enum('date-format') !== index) settings.set_enum('date-format', index);
+        });
         ['language-mode', 'date-font'].forEach(key =>
             connectSetting(settings, key, () => updateFormatExampleList())
         );

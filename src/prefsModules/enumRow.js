@@ -27,6 +27,11 @@ export function createEnumRow(settings, { title, key, labels, wide = false }) {
     let row;
     let setIndex;
 
+    // Skips the write when the row only follows a settings change, so that a reset key stays reset
+    const setEnum = index => {
+        if (settings.get_enum(key) !== index) settings.set_enum(key, index);
+    };
+
     if ('ToggleGroup' in Adw) {
         const toggleGroup = new Adw.ToggleGroup({
             valign: Gtk.Align.CENTER,
@@ -45,9 +50,7 @@ export function createEnumRow(settings, { title, key, labels, wide = false }) {
 
         setIndex = index => toggleGroup.set_active(index);
         setIndex(settings.get_enum(key));
-        toggleGroup.connect('notify::active', () =>
-            settings.set_enum(key, toggleGroup.get_active())
-        );
+        toggleGroup.connect('notify::active', () => setEnum(toggleGroup.get_active()));
     } else {
         row = new Adw.ComboRow({
             title,
@@ -56,7 +59,7 @@ export function createEnumRow(settings, { title, key, labels, wide = false }) {
         });
 
         setIndex = index => row.set_selected(index);
-        row.connect('notify::selected', () => settings.set_enum(key, row.get_selected()));
+        row.connect('notify::selected', () => setEnum(row.get_selected()));
     }
 
     connectSetting(settings, key, () => setIndex(settings.get_enum(key)));
