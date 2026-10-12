@@ -20,6 +20,7 @@ import {
     getMonthFontSupport,
     getWeekdayFontSupport,
     registerBundledFonts,
+    sanitizeFontFamily,
 } from './lib/utils.js';
 
 //#region Constants
@@ -440,14 +441,9 @@ export default class ModernClockExtension extends Extension {
             time = `${now.format(`${h12.toString().padStart(2, '0')}:%M ${ampm}`)}`;
         }
 
-        const decorate = (text, decorations) => {
-            let decoArray = Array.isArray(decorations) ? decorations : [];
-            decoArray = [decoArray[0], decoArray[1]].map(item => {
-                if (typeof item === 'string') return item;
-                else return '';
-            });
-            return [decoArray[0], text, decoArray[1]].filter(Boolean).join(' ');
-        };
+        // Decorations are [prefix, suffix]; empty or missing ones are skipped
+        const decorate = (text, [prefix, suffix]) =>
+            [prefix, text, suffix].filter(Boolean).join(' ');
         clockWidget.weekdayLabel.set_text(
             decorate(weekday, this._settings.get_strv('weekday-decorations'))
         );
@@ -469,46 +465,22 @@ export default class ModernClockExtension extends Extension {
         const referenceDimension = Math.min(clockWidget.monitor.width, clockWidget.monitor.height);
         const monitorScale = referenceDimension / BASE_HEIGHT / this._themeContext.scale_factor;
 
-        clockWidget.weekdayLabel.visible = this._settings.get_boolean('weekday-enabled');
-        clockWidget.dateLabel.visible = this._settings.get_boolean('date-enabled');
-        clockWidget.timeLabel.visible = this._settings.get_boolean('time-enabled');
+        ['weekday', 'date', 'time'].forEach(line => {
+            const label = clockWidget[`${line}Label`];
+            label.visible = this._settings.get_boolean(`${line}-enabled`);
+            if (!label.visible) return;
 
-        if (clockWidget.weekdayLabel.visible) {
-            clockWidget.weekdayLabel.set_style(
+            label.set_style(
                 this._createLabelStyle(monitorScale, {
-                    fontFace: this._settings.get_string('weekday-font'),
-                    sizeScale: this._settings.get_double('weekday-size-scale'),
-                    letterSpacingScale: this._settings.get_double('weekday-tracking-scale'),
-                    base: BASE_DIMENSIONS.weekday,
-                    color: this._settings.get_string('weekday-color'),
-                    colorEnabled: this._settings.get_boolean('weekday-color-enabled'),
+                    fontFace: this._settings.get_string(`${line}-font`),
+                    sizeScale: this._settings.get_double(`${line}-size-scale`),
+                    letterSpacingScale: this._settings.get_double(`${line}-tracking-scale`),
+                    base: BASE_DIMENSIONS[line],
+                    color: this._settings.get_string(`${line}-color`),
+                    colorEnabled: this._settings.get_boolean(`${line}-color-enabled`),
                 })
             );
-        }
-        if (clockWidget.dateLabel.visible) {
-            clockWidget.dateLabel.set_style(
-                this._createLabelStyle(monitorScale, {
-                    fontFace: this._settings.get_string('date-font'),
-                    sizeScale: this._settings.get_double('date-size-scale'),
-                    letterSpacingScale: this._settings.get_double('date-tracking-scale'),
-                    base: BASE_DIMENSIONS.date,
-                    color: this._settings.get_string('date-color'),
-                    colorEnabled: this._settings.get_boolean('date-color-enabled'),
-                })
-            );
-        }
-        if (clockWidget.timeLabel.visible) {
-            clockWidget.timeLabel.set_style(
-                this._createLabelStyle(monitorScale, {
-                    fontFace: this._settings.get_string('time-font'),
-                    sizeScale: this._settings.get_double('time-size-scale'),
-                    letterSpacingScale: this._settings.get_double('time-tracking-scale'),
-                    base: BASE_DIMENSIONS.time,
-                    color: this._settings.get_string('time-color'),
-                    colorEnabled: this._settings.get_boolean('time-color-enabled'),
-                })
-            );
-        }
+        });
     }
     //#endregion
 
@@ -517,7 +489,7 @@ export default class ModernClockExtension extends Extension {
         monitorScale,
         { fontFace, sizeScale, letterSpacingScale, base, color, colorEnabled }
     ) {
-        const safeFontFace = fontFace.replace(/['"\\;{}]/g, '').trim();
+        const safeFontFace = sanitizeFontFamily(fontFace);
 
         const computePx = (px, sliderValue) => {
             const userScale = SCALE_MIN * Math.pow(SCALE_MAX / SCALE_MIN, sliderValue);

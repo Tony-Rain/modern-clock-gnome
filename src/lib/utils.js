@@ -27,10 +27,20 @@ function namesFor(count, format, makeDate) {
             .toUpperCase()
     ).join('');
 }
+/**
+ * Removes the characters that could break out of a quoted CSS font-family value.
+ *
+ * @param {string} fontFamily - The font family name from the settings.
+ * @returns {string} The safe font family name.
+ */
+export function sanitizeFontFamily(fontFamily) {
+    return fontFamily.replace(/['"\\;{}]/g, '').trim();
+}
+
 // Returns the requested font, or `null` if it is not installed (or not loaded yet), instead of
 // the substitute that Pango would silently pick.
 function loadFont(fontFamily) {
-    const family = fontFamily.replace(/['"\\;{}]/g, '').trim();
+    const family = sanitizeFontFamily(fontFamily);
     const context = PangoCairo.FontMap.get_default().create_context();
     const desc = new Pango.FontDescription();
     desc.set_family(family);
