@@ -128,7 +128,8 @@ function openPicker(parent, settings, key, initialRgba) {
 
     // Escape and the Cancel button both end up here
     dialog.connect('closed', () => {
-        if (!confirmed) settings.set_string(key, initialColor);
+        if (!confirmed && settings.get_string(key) !== initialColor)
+            settings.set_string(key, initialColor);
     });
 
     dialog.present(parent);
