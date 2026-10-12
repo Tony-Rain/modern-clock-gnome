@@ -139,13 +139,6 @@ export default class ModernClockExtension extends Extension {
         // -- Get settings -----------------------------------------------------
         this._settings = this.getSettings();
 
-        // Setting migration from boolean 'use-24h' to enum 'time-format'
-        const legacy24h = this._settings.get_user_value('use-24h');
-        if (legacy24h !== null) {
-            this._settings.set_string('time-format', legacy24h.get_boolean() ? '24h' : '12h');
-            this._settings.reset('use-24h');
-        }
-
         // -- Get theme -------------------------------------------------
         this._themeContext = St.ThemeContext.get_for_stage(global.stage);
         this._themeColor = this._getThemeColor();

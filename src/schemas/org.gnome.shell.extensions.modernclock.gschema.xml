@@ -43,11 +43,6 @@
                 which case use English. 'english': use English.
             </description>
         </key>
-        <key name='use-24h' type='b'>
-            <default>false</default>
-            <summary>Use 24-hour format (deprecated)</summary>
-            <description>Deprecated: replaced by time-format. Only read once to migrate the setting from older versions.</description>
-        </key>
         <!-- Weekday -->
         <key name='weekday-enabled' type='b'>
             <default>true</default>
