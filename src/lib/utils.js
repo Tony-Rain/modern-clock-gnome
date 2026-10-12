@@ -37,6 +37,21 @@ export function sanitizeFontFamily(fontFamily) {
     return fontFamily.replace(/['"\\;{}]/g, '').trim();
 }
 
+/**
+ * Strips the trailing comma that version 3.0 left in the font settings keys.
+ *
+ * Version 3.0 saved Pango font descriptions, which end with a comma for families ending in a style
+ * word (e.g. "Open Sans Condensed,"). Both the shell and the preferences migrate the keys, since
+ * after an update on Wayland the preferences run the new code before the shell does.
+ *
+ * @param {Gio.Settings} settings - The settings object for this extension.
+ * @param {string} key - The font settings key.
+ */
+export function migrateFontKey(settings, key) {
+    const font = settings.get_string(key);
+    if (font.endsWith(',')) settings.set_string(key, font.slice(0, -1).trim());
+}
+
 // Returns the requested font, or `null` if it is not installed (or not loaded yet), instead of
 // the substitute that Pango would silently pick.
 function loadFont(fontFamily) {

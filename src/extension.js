@@ -20,6 +20,7 @@ import {
     getMonthFontSupport,
     getWeekdayFontSupport,
     loadedFontsReplaceExisting,
+    migrateFontKey,
     registerBundledFonts,
     sanitizeFontFamily,
 } from './lib/utils.js';
@@ -141,12 +142,9 @@ export default class ModernClockExtension extends Extension {
         // -- Get settings -----------------------------------------------------
         this._settings = this.getSettings();
 
-        // Version 3.0 saved Pango font descriptions, which end with a comma for families ending
-        // in a style word (e.g. "Open Sans Condensed,"). Keep the family name only.
-        ['weekday-font', 'date-font', 'time-font'].forEach(key => {
-            const font = this._settings.get_string(key);
-            if (font.endsWith(',')) this._settings.set_string(key, font.slice(0, -1).trim());
-        });
+        ['weekday-font', 'date-font', 'time-font'].forEach(key =>
+            migrateFontKey(this._settings, key)
+        );
 
         // -- Get theme -------------------------------------------------
         this._themeContext = St.ThemeContext.get_for_stage(global.stage);

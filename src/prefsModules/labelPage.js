@@ -9,7 +9,7 @@ import PangoCairo from 'gi://PangoCairo';
 
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
-import { getFontPreviewText } from '../lib/utils.js';
+import { getFontPreviewText, migrateFontKey } from '../lib/utils.js';
 import { createColorButton } from './colorButton.js';
 import { createScaleRow } from './scaleRow.js';
 import { connectSetting } from './settingsHandlers.js';
@@ -100,6 +100,7 @@ export function createLabelPage(settings, { pageTitle, pageIcon, keyPrefix }) {
         showFont(family);
         fontResetButton.set_visible(family !== defaultFont);
     };
+    migrateFontKey(settings, keys.font);
     syncFontFromSettings();
 
     fontButton.connect('clicked', () => {
