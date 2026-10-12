@@ -68,11 +68,12 @@ export function createLabelPage(settings, { pageTitle, pageIcon, keyPrefix }) {
     });
 
     const defaultFont = settings.get_default_value(keys.font).deep_unpack();
-    const fontFamilies = PangoCairo.FontMap.get_default().list_families();
+    // The font map is asked on every lookup, since fonts can be installed while the window is open
     const findFontFamily = family =>
         family
-            ? (fontFamilies.find(font => font.get_name().toLowerCase() === family.toLowerCase()) ??
-              null)
+            ? (PangoCairo.FontMap.get_default()
+                  .list_families()
+                  .find(font => font.get_name().toLowerCase() === family.toLowerCase()) ?? null)
             : null;
 
     const showFont = family => {
