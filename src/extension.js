@@ -417,6 +417,9 @@ export default class ModernClockExtension extends Extension {
             case 'numeric':
                 date = now.format('%d.%m.%Y');
                 break;
+            case 'numeric-us':
+                date = now.format('%m/%d/%Y');
+                break;
             case 'text':
             default:
                 date = useEnglishDate

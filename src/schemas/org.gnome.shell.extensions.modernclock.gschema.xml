@@ -13,8 +13,9 @@
     </enum>
     <enum id='org.gnome.shell.extensions.modernclock.date-format'>
         <value value='0' nick='numeric'/>
-        <value value='1' nick='text'/>
-        <value value='2' nick='long'/>
+        <value value='1' nick='numeric-us'/>
+        <value value='2' nick='text'/>
+        <value value='3' nick='long'/>
     </enum>
     <enum id='org.gnome.shell.extensions.modernclock.time-format'>
         <value value='0' nick='24h'/>
@@ -127,7 +128,7 @@
         <key name='date-format' enum='org.gnome.shell.extensions.modernclock.date-format'>
             <default>'text'</default>
             <summary>Date format</summary>
-            <description>Format of the date. 'numeric': 01.09.2026, 'text': 01 SEP 2026, 'long': 01 SEPTEMBER 2026.</description>
+            <description>Format of the date. 'numeric': 01.09.2026, 'numeric-us': 09/01/2026, 'text': 01 SEP 2026, 'long': 01 SEPTEMBER 2026.</description>
         </key>
         <!-- Time -->
         <key name='time-enabled' type='b'>

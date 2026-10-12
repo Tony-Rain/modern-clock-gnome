@@ -109,9 +109,10 @@ export default class ModernClockPreferences extends ExtensionPreferences {
             const auto = mode === 'auto';
             const mfs = getMonthFontSupport(settings.get_string('date-font'));
 
-            // date-format: 0 = 'numeric', 1 = 'text', 2 = 'long'
+            // date-format: 0 = 'numeric', 1 = 'numeric-us', 2 = 'text', 3 = 'long'
             const strings = [
                 exampleDate.format('%d.%m.%Y'),
+                exampleDate.format('%m/%d/%Y'),
                 en || (auto && !mfs.short)
                     ? '01 SEP 2026'
                     : exampleDate.format('%d %b %Y').toUpperCase(),
