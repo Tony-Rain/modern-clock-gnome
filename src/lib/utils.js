@@ -79,12 +79,19 @@ export function migrateFontKey(settings, key) {
 // the substitute that Pango would silently pick.
 function loadFont(fontFamily) {
     const family = sanitizeFontFamily(fontFamily);
-    const context = PangoCairo.FontMap.get_default().create_context();
+    const fontMap = PangoCairo.FontMap.get_default();
+    const context = fontMap.create_context();
     const desc = new Pango.FontDescription();
     desc.set_family(family);
     desc.set_size(12 * Pango.SCALE);
     const font = context.load_font(desc);
-    if (!font || font.describe().get_family().toLowerCase() !== family.toLowerCase()) return null;
+    if (!font) return null;
+
+    // Generic families such as "Sans" or "Monospace" load a font with another name, but they are
+    // listed by the font map (and the font dialog), unlike a missing font
+    const loadedFamily = font.describe().get_family();
+    if (loadedFamily.toLowerCase() !== family.toLowerCase() && !fontMap.get_family(family))
+        return null;
     return font;
 }
 function coversText(font, text) {
