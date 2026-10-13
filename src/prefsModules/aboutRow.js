@@ -7,34 +7,12 @@ import Gtk from 'gi://Gtk';
 
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
-//#region Credits
-// Feel free to add your name and url in the relevant section below if you have contributed.
-
-// Translators do not need to write in this file and must instead use the "translator_credits"
-// string located in the translation files.
-const artists = [];
-const designers = [];
-const developers = [
-    'Tony Rain https://github.com/Tony-Rain',
-    'Djinn Alexio https://gitlab.gnome.org/DjinnAlexio',
-];
-const documenters = [];
-
-const copyright = '© 2026 Modern Clock for GNOME Contributors';
-const developerName = 'Modern Clock for GNOME Contributors';
-const extensionIcon = 'modern-clock-gnome-logo';
-const extensionPageUrl = 'https://extensions.gnome.org/extension/9882/modern-clock/';
-const issueUrl = 'https://github.com/Tony-Rain/modern-clock-gnome/issues';
-const licenseType = Gtk.License.GPL_3_0;
-// The string for `release_notes` supports paragraphs <p>, emphasis (italics) <em>, code <code>,
-// and ordered <ol> and unordered <ul> lists with <li> list items.
-const releaseNotes = ``;
-const supportUrl = '';
-//#endregion
+// CONTRIBUTORS: To be credited in the About dialog, add your name(s) to the matching property
+// (artists, designers, developers, documenters) in the AboutDialog below, optionally followed
+// by an <email> or a URL.
 
 /**
  * Creates a row that opens an AboutDialog window with information about the extension.
- *
  * @param {ExtensionMetadata} metadata - The metadata object from metadata.json.
  * @returns {Adw.ActionRow} The activatable row that opens the AboutDialog.
  */
@@ -46,32 +24,41 @@ export function createAboutRow(metadata) {
     row.add_prefix(new Gtk.Image({ icon_name: 'help-about-symbolic' }));
     row.add_suffix(new Gtk.Image({ icon_name: 'go-next-symbolic' }));
 
+    const version = metadata['version-name'] ?? '';
+
     //#region About dialog
     row.connect('activated', () => {
-        const version = metadata['version-name'] ?? '';
         const aboutWindow = new Adw.AboutDialog({
-            application_icon: extensionIcon,
+            application_icon: 'modern-clock-gnome-logo',
             application_name: metadata.name,
-            artists,
+            artists: [],
             comments: metadata.description,
-            copyright,
-            designers,
-            developer_name: developerName,
-            developers,
-            documenters,
-            issue_url: issueUrl,
-            license_type: licenseType,
-            release_notes: releaseNotes,
+            copyright: '© 2026 Modern Clock for GNOME Contributors',
+            designers: [],
+            developer_name: 'Tony Rain',
+            developers: [
+                'Tony Rain https://github.com/Tony-Rain',
+                'Djinn Alexio https://gitlab.gnome.org/DjinnAlexio',
+            ],
+            documenters: [],
+            issue_url: 'https://github.com/Tony-Rain/modern-clock-gnome/issues',
+            license_type: Gtk.License.GPL_3_0,
             release_notes_version: version,
-            support_url: supportUrl,
-            // Translators: To be credited in the "About" dialog, put your
-            // name(s) here, optionally followed by an <email> or a URL.
-            // One translator per line.
+            // The `release_notes` string uses HTML format and supports paragraphs <p>,
+            // emphasis (italics) <em>, code <code>, and ordered <ol> and unordered <ul> lists
+            // with <li> list items.
+            release_notes: '',
+            support_url: '',
+            // Translators: To be credited in the "About" dialog, put your name(s) here, optionally
+            // followed by an <email> or a URL. One translator per line.
             translator_credits: _('translator_credits'),
-            version: version,
+            version,
             website: metadata.url,
         });
-        aboutWindow.add_link(_('Extension Page'), extensionPageUrl);
+        aboutWindow.add_link(
+            _('Extension Page'),
+            'https://extensions.gnome.org/extension/9882/modern-clock/'
+        );
         aboutWindow.add_acknowledgement_section(_('Based on'), [
             'Modern Clock for KDE https://github.com/Prayag2/kde_modernclock',
         ]);
