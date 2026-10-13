@@ -3,9 +3,11 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 import Adw from 'gi://Adw';
+import GLib from 'gi://GLib';
 import Gtk from 'gi://Gtk';
 
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import * as Config from 'resource:///org/gnome/Shell/Extensions/js/misc/config.js';
 
 // CONTRIBUTORS: To be credited in the About dialog, add your name(s) to the matching property
 // (artists, designers, developers, documenters) in the AboutDialog below, optionally followed
@@ -13,6 +15,7 @@ import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensio
 
 /**
  * Creates a row that opens an AboutDialog window with information about the extension.
+ *
  * @param {ExtensionMetadata} metadata - The metadata object from metadata.json.
  * @returns {Adw.ActionRow} The activatable row that opens the AboutDialog.
  */
@@ -25,6 +28,26 @@ export function createAboutRow(metadata) {
     row.add_suffix(new Gtk.Image({ icon_name: 'go-next-symbolic' }));
 
     const version = metadata['version-name'] ?? '';
+    const getDebugInfo = () => {
+        const build = metadata.version ? ` (${metadata.version})` : '';
+        const gtkVersion = `${Gtk.get_major_version()}.${Gtk.get_minor_version()}.${Gtk.get_micro_version()}`;
+        const adwVersion = `${Adw.get_major_version()}.${Adw.get_minor_version()}.${Adw.get_micro_version()}`;
+        const sessionType = GLib.getenv('XDG_SESSION_TYPE') ?? 'Unknown';
+        const system = GLib.get_os_info('NAME') ?? 'Unknown';
+        const systemVersion =
+            GLib.get_os_info('VERSION') ??
+            GLib.get_os_info('VERSION_ID') ??
+            GLib.get_os_info('BUILD_ID') ??
+            '';
+
+        return `- ${metadata.name} version: ${version}${build}
+- GNOME version: ${Config.PACKAGE_VERSION}
+- GTK version: ${gtkVersion}
+- Libadwaita version: ${adwVersion}
+
+- Session type: ${sessionType}
+- System: ${system} ${systemVersion}`.trim();
+    };
 
     //#region About dialog
     row.connect('activated', () => {
@@ -34,6 +57,7 @@ export function createAboutRow(metadata) {
             artists: [],
             comments: metadata.description,
             copyright: '© 2026 Modern Clock for GNOME Contributors',
+            debug_info: getDebugInfo(),
             designers: [],
             developer_name: 'Tony Rain',
             developers: [
