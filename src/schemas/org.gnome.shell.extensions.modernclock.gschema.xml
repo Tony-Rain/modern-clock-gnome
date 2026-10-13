@@ -40,8 +40,8 @@
             <summary>Widget language</summary>
             <description>
                 Language used by the widget. 'system': use the LC_TIME language. 'auto': use the
-                LC_TIME language, unless the default weekday font cannot display every weekday, in
-                which case use English. 'english': use English.
+                LC_TIME language, except for the weekday or the month names that the font of their
+                line cannot display, which use English. 'english': use English.
             </description>
         </key>
         <!-- Weekday -->

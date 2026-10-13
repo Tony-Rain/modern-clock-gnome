@@ -25,7 +25,7 @@ A desktop clock widget for GNOME, inspired by [Modern Clock for KDE][modern-cloc
 - **Multi-monitor support** — shown on every display and scaled independently
 - **Language** — follows your system locale, falls back to English if the font can't render it, or can be forced into English
 - **Show or hide** the weekday, date, and time independently
-- **Flexible formats** — full or abbreviated weekday, three date styles, 24-hour or AM/PM time
+- **Flexible formats** — full or abbreviated weekday, four date styles, 24-hour or AM/PM time
 - **Customizable** — font, size, letter spacing, color, and custom prefixes and suffixes for each line
 - **Optionally theme-aware** — can use your system accent color instead of a custom one
 
