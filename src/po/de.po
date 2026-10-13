@@ -1,0 +1,254 @@
+# German translations for Modern Clock for GNOME.
+# Copyright (C) 2026 Modern Clock for GNOME Contributors
+# This file is distributed under the same license as the Modern Clock for GNOME package.
+# Adrian Seidel, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Modern Clock for GNOME\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-13 12:17+0300\n"
+"PO-Revision-Date: 2026-10-12 13:00+0200\n"
+"Last-Translator: Adrian Seidel\n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Gtranslator 51.0\n"
+
+#: src/extension.js:694
+msgid "Modern Clock Fonts Installed"
+msgstr "Schriften für Modern Clock installiert"
+
+#: src/extension.js:695
+msgid "Log out and back in for the new fonts to take effect."
+msgstr ""
+"Melden Sie sich ab und wieder an, damit die neuen Schriften wirksam werden."
+
+#: src/prefs.js:58
+msgid "General"
+msgstr "Allgemein"
+
+#: src/prefs.js:66
+msgid "Weekday"
+msgstr "Wochentag"
+
+#: src/prefs.js:72
+msgid "Date"
+msgstr "Datum"
+
+#: src/prefs.js:77
+msgid "Time"
+msgstr "Uhrzeit"
+
+#: src/prefs.js:89 src/prefs.js:101 src/prefs.js:148
+msgid "Format"
+msgstr "Format"
+
+#: src/prefs.js:91
+msgid "Abbreviated"
+msgstr "Abgekürzt"
+
+#: src/prefs.js:91
+msgid "Full"
+msgstr "Vollständig"
+
+#: src/prefs.js:150
+msgid "12-hour"
+msgstr "12-Stunden"
+
+#: src/prefs.js:150
+msgid "24-hour"
+msgstr "24-Stunden"
+
+#: src/prefsModules/aboutRow.js:43
+msgid "About Modern Clock"
+msgstr "Über Modern Clock"
+
+#. Translators: To be credited in the "About" dialog, put your
+#. name(s) here, optionally followed by an <email> or a URL.
+#. One translator per line.
+#: src/prefsModules/aboutRow.js:70
+msgid "translator_credits"
+msgstr "Adrian Seidel"
+
+#: src/prefsModules/aboutRow.js:74
+msgid "Extension Page"
+msgstr "Erweiterungsseite"
+
+#: src/prefsModules/aboutRow.js:75
+msgid "Based on"
+msgstr "Basierend auf"
+
+#: src/prefsModules/aboutRow.js:78
+msgid "Fonts"
+msgstr "Schriftarten"
+
+#: src/prefsModules/colorButton.js:106 src/prefsModules/labelPage.js:152
+msgid "Color"
+msgstr "Farbe"
+
+#: src/prefsModules/colorButton.js:108 src/prefsModules/mainPage.js:149
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: src/prefsModules/colorButton.js:111
+msgid "Select"
+msgstr "Auswählen"
+
+#: src/prefsModules/labelPage.js:46
+msgid "Appearance"
+msgstr "Erscheinungsbild"
+
+#: src/prefsModules/labelPage.js:50
+msgid "Show"
+msgstr "Anzeigen"
+
+#: src/prefsModules/labelPage.js:56
+msgid "Font"
+msgstr "Schriftart"
+
+#: src/prefsModules/labelPage.js:65
+msgid "Reset to default"
+msgstr "Auf Standard zurücksetzen"
+
+#: src/prefsModules/labelPage.js:135
+msgid "Size"
+msgstr "Größe"
+
+#: src/prefsModules/labelPage.js:137
+msgid "Large"
+msgstr "Groß"
+
+#: src/prefsModules/labelPage.js:137
+msgid "Small"
+msgstr "Klein"
+
+#: src/prefsModules/labelPage.js:144
+msgid "Letter Spacing"
+msgstr "Zeichenabstand"
+
+#: src/prefsModules/labelPage.js:146
+msgid "Narrow"
+msgstr "Schmal"
+
+#: src/prefsModules/labelPage.js:146
+msgid "Wide"
+msgstr "Breit"
+
+#: src/prefsModules/labelPage.js:157
+msgid "Use custom color"
+msgstr "Benutzerdefinierte Farbe verwenden"
+
+#: src/prefsModules/labelPage.js:171
+msgid "Decoration"
+msgstr "Dekoration"
+
+#: src/prefsModules/labelPage.js:176
+msgid "Prefix"
+msgstr "Präfix"
+
+#: src/prefsModules/labelPage.js:176
+msgid "Suffix"
+msgstr "Suffix"
+
+#: src/prefsModules/mainPage.js:39
+msgid "Layout"
+msgstr "Anordnung"
+
+#: src/prefsModules/mainPage.js:43
+msgid "Horizontal"
+msgstr "Horizontal"
+
+#: src/prefsModules/mainPage.js:45
+msgid "Left"
+msgstr "Links"
+
+#: src/prefsModules/mainPage.js:45
+msgid "Right"
+msgstr "Rechts"
+
+#: src/prefsModules/mainPage.js:49
+msgid "Vertical"
+msgstr "Vertikal"
+
+#: src/prefsModules/mainPage.js:51
+msgid "Bottom"
+msgstr "Unten"
+
+#: src/prefsModules/mainPage.js:51
+msgid "Top"
+msgstr "Oben"
+
+#: src/prefsModules/mainPage.js:72
+msgid "Language"
+msgstr "Sprache"
+
+#: src/prefsModules/mainPage.js:78
+msgid "System"
+msgstr "System"
+
+#: src/prefsModules/mainPage.js:80
+msgid ""
+"Use your time format language. Some characters may appear in a different "
+"font."
+msgstr ""
+"Die Sprache Ihres Zeitformats verwenden. Einige Zeichen werden "
+"möglicherweise in einer anderen Schriftart angezeigt."
+
+#: src/prefsModules/mainPage.js:84
+msgid "Auto"
+msgstr "Auto"
+
+#: src/prefsModules/mainPage.js:86
+msgid ""
+"Use your time format language, falling back to English if the font does not "
+"support it."
+msgstr ""
+"Die Sprache Ihres Zeitformats verwenden und auf Englisch zurückgreifen, wenn "
+"die Schriftart sie nicht unterstützt."
+
+#: src/prefsModules/mainPage.js:90
+msgid "English"
+msgstr "Englisch"
+
+#: src/prefsModules/mainPage.js:91
+msgid "Use English."
+msgstr "Englisch verwenden."
+
+#: src/prefsModules/mainPage.js:115
+msgid "Mode"
+msgstr "Modus"
+
+#: src/prefsModules/mainPage.js:128
+msgctxt "preferences group title"
+msgid "Reset"
+msgstr "Zurücksetzen"
+
+#: src/prefsModules/mainPage.js:133
+msgid "All Settings"
+msgstr "Alle Einstellungen"
+
+#: src/prefsModules/mainPage.js:134
+msgid "Restore every setting to its default value"
+msgstr "Alle Einstellungen auf ihre Standardwerte zurücksetzen"
+
+#: src/prefsModules/mainPage.js:137 src/prefsModules/mainPage.js:150
+msgid "Reset"
+msgstr "Zurücksetzen"
+
+#: src/prefsModules/mainPage.js:146
+msgid "Reset All Settings?"
+msgstr "Alle Einstellungen zurücksetzen?"
+
+#: src/prefsModules/mainPage.js:147
+msgid "Every setting of Modern Clock will be restored to its default value."
+msgstr ""
+"Alle Einstellungen von Modern Clock werden auf ihre Standardwerte "
+"zurückgesetzt."
+
+#: src/prefsModules/mainPage.js:169
+msgid "Information"
+msgstr "Informationen"

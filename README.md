@@ -3,6 +3,7 @@
 [![Language: English][badge-readme-en]][readme-en]
 [![Язык: Русский][badge-readme-ru]][readme-ru]
 [![Langue : Français][badge-readme-fr]][readme-fr]
+[![Sprache: Deutsch][badge-readme-de]][readme-de]
 
 # Modern Clock for GNOME
 
@@ -126,9 +127,11 @@ The bundled fonts are covered by their own licenses and are not part of the GPL-
 [badge-readme-en]: https://img.shields.io/badge/Language-English-3584e4
 [badge-readme-fr]: https://img.shields.io/badge/Langue-Fran%C3%A7ais-9141ac
 [badge-readme-ru]: https://img.shields.io/badge/%D0%AF%D0%B7%D1%8B%D0%BA-%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9-e01b24
+[badge-readme-de]: https://img.shields.io/badge/Sprache-Deutsch-26a269
 [readme-en]: ./README.md
 [readme-fr]: ./README.fr.md
 [readme-ru]: ./README.ru.md
+[readme-de]: ./README.de.md
 [ego-page]: https://extensions.gnome.org/extension/9882/modern-clock/
 [license]: ./LICENSE
 [badge-shell]: https://img.shields.io/badge/GNOME_versions-46_--_51-3584e4?logo=gnome
