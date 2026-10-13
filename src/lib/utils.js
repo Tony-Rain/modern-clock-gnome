@@ -102,7 +102,9 @@ const fontMapsWithBundledFonts = new WeakSet();
 
 /**
  * Loads the bundled fonts straight from their files into the given font maps, so they can be used
- * right away without being installed. Each map is only loaded once per process.
+ * right away without being installed. Each map is only loaded once per process, unless it lost
+ * them since: GTK clears its font map when fonts are installed or removed
+ * (`pango_fc_font_map_config_changed()`), which also drops the loaded files.
  *
  * The fonts are loaded even when a map already provides their family, e.g. from copies made by an
  * older version: from Pango 1.56.4, loaded faces replace the existing ones with the same name.
@@ -118,7 +120,11 @@ export function registerBundledFonts(fontsDir, fontMaps) {
     if (!fontMaps.every(fontMap => typeof fontMap.add_font_file === 'function')) return false;
 
     new Set(fontMaps).forEach(fontMap => {
-        if (fontMapsWithBundledFonts.has(fontMap)) return;
+        if (
+            fontMapsWithBundledFonts.has(fontMap) &&
+            Object.values(FONT_FILES).every(family => fontMap.get_family(family))
+        )
+            return;
         Object.keys(FONT_FILES).forEach(fileName =>
             fontMap.add_font_file(GLib.build_filenamev([fontsDir, fileName]))
         );
