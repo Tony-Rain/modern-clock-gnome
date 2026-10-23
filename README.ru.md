@@ -123,6 +123,7 @@ GNU General Public License версии 3 или более поздней. См
 
 - Оригинал: [Modern Clock for KDE][modern-clock-kde] от Prayag2
 - Шрифты: [Anurati][anurati], [Poppins][poppins]
+- Переводы: французский — [djinnalexio][djinnalexio], немецкий — [FasteryXD][fasteryxd]
 
 [badge-readme-en]: https://img.shields.io/badge/Language-English-3584e4
 [badge-readme-fr]: https://img.shields.io/badge/Langue-Fran%C3%A7ais-9141ac
@@ -141,3 +142,5 @@ GNU General Public License версии 3 или более поздней. См
 [releases]: https://github.com/Tony-Rain/modern-clock-gnome/releases
 [anurati]: https://www.behance.net/gallery/33704618/ANURATI-Free-font
 [poppins]: https://github.com/itfoundry/poppins
+[djinnalexio]: https://github.com/djinnalexio
+[fasteryxd]: https://github.com/FasteryXD

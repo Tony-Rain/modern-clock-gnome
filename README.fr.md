@@ -123,6 +123,7 @@ Les polices incluses sont couvertes par leurs propres licences et ne font pas pa
 
 - Projet original : [Modern Clock for KDE][modern-clock-kde] par Prayag2
 - Polices : [Anurati][anurati], [Poppins][poppins]
+- Traductions : français par [djinnalexio][djinnalexio], allemand par [FasteryXD][fasteryxd]
 
 [badge-readme-en]: https://img.shields.io/badge/Language-English-3584e4
 [badge-readme-fr]: https://img.shields.io/badge/Langue-Fran%C3%A7ais-9141ac
@@ -141,3 +142,5 @@ Les polices incluses sont couvertes par leurs propres licences et ne font pas pa
 [releases]: https://github.com/Tony-Rain/modern-clock-gnome/releases
 [anurati]: https://www.behance.net/gallery/33704618/ANURATI-Free-font
 [poppins]: https://github.com/itfoundry/poppins
+[djinnalexio]: https://github.com/djinnalexio
+[fasteryxd]: https://github.com/FasteryXD
