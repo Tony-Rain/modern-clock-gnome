@@ -19,7 +19,7 @@ NODE_MODULES_STAMP := node_modules/.install-stamp
 pack:
 	@mkdir -p dist
 	gnome-extensions pack --force ./src --extra-source=../LICENSE --extra-source=assets \
-	--extra-source=fonts --extra-source=lib --extra-source=prefsModules --out-dir=dist
+	--extra-source=fonts --extra-source=lib --out-dir=dist
 	mv -f dist/$(UUID).shell-extension.zip $(ZIP)
 	@echo "✓ Extension bundle: $(ZIP)"
 

@@ -24,7 +24,7 @@ import {
     registerBundledFonts,
     sanitizeFontFamily,
     toTimeLocaleUpperCase,
-} from './lib/utils.js';
+} from './lib/shared/utils.js';
 
 //#region Constants
 // -- Base dimensions for 1080p ------------------------------------------------

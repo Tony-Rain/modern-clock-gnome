@@ -63,134 +63,134 @@ msgstr "12-Stunden"
 msgid "24-hour"
 msgstr "24-Stunden"
 
-#: src/prefsModules/aboutRow.js:43
+#: src/lib/prefs/aboutRow.js:43
 msgid "About Modern Clock"
 msgstr "Über Modern Clock"
 
 #. Translators: To be credited in the "About" dialog, put your
 #. name(s) here, optionally followed by an <email> or a URL.
 #. One translator per line.
-#: src/prefsModules/aboutRow.js:70
+#: src/lib/prefs/aboutRow.js:70
 msgid "translator_credits"
 msgstr "Adrian Seidel"
 
-#: src/prefsModules/aboutRow.js:74
+#: src/lib/prefs/aboutRow.js:74
 msgid "Extension Page"
 msgstr "Erweiterungsseite"
 
-#: src/prefsModules/aboutRow.js:75
+#: src/lib/prefs/aboutRow.js:75
 msgid "Based on"
 msgstr "Basierend auf"
 
-#: src/prefsModules/aboutRow.js:78
+#: src/lib/prefs/aboutRow.js:78
 msgid "Fonts"
 msgstr "Schriftarten"
 
-#: src/prefsModules/colorButton.js:106 src/prefsModules/labelPage.js:152
+#: src/lib/prefs/colorButton.js:106 src/lib/prefs/labelPage.js:152
 msgid "Color"
 msgstr "Farbe"
 
-#: src/prefsModules/colorButton.js:108 src/prefsModules/mainPage.js:149
+#: src/lib/prefs/colorButton.js:108 src/lib/prefs/mainPage.js:149
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: src/prefsModules/colorButton.js:111
+#: src/lib/prefs/colorButton.js:111
 msgid "Select"
 msgstr "Auswählen"
 
-#: src/prefsModules/labelPage.js:46
+#: src/lib/prefs/labelPage.js:46
 msgid "Appearance"
 msgstr "Erscheinungsbild"
 
-#: src/prefsModules/labelPage.js:50
+#: src/lib/prefs/labelPage.js:50
 msgid "Show"
 msgstr "Anzeigen"
 
-#: src/prefsModules/labelPage.js:56
+#: src/lib/prefs/labelPage.js:56
 msgid "Font"
 msgstr "Schriftart"
 
-#: src/prefsModules/labelPage.js:65
+#: src/lib/prefs/labelPage.js:65
 msgid "Reset to default"
 msgstr "Auf Standard zurücksetzen"
 
-#: src/prefsModules/labelPage.js:135
+#: src/lib/prefs/labelPage.js:135
 msgid "Size"
 msgstr "Größe"
 
-#: src/prefsModules/labelPage.js:137
+#: src/lib/prefs/labelPage.js:137
 msgid "Large"
 msgstr "Groß"
 
-#: src/prefsModules/labelPage.js:137
+#: src/lib/prefs/labelPage.js:137
 msgid "Small"
 msgstr "Klein"
 
-#: src/prefsModules/labelPage.js:144
+#: src/lib/prefs/labelPage.js:144
 msgid "Letter Spacing"
 msgstr "Zeichenabstand"
 
-#: src/prefsModules/labelPage.js:146
+#: src/lib/prefs/labelPage.js:146
 msgid "Narrow"
 msgstr "Schmal"
 
-#: src/prefsModules/labelPage.js:146
+#: src/lib/prefs/labelPage.js:146
 msgid "Wide"
 msgstr "Breit"
 
-#: src/prefsModules/labelPage.js:157
+#: src/lib/prefs/labelPage.js:157
 msgid "Use custom color"
 msgstr "Benutzerdefinierte Farbe verwenden"
 
-#: src/prefsModules/labelPage.js:171
+#: src/lib/prefs/labelPage.js:171
 msgid "Decoration"
 msgstr "Dekoration"
 
-#: src/prefsModules/labelPage.js:176
+#: src/lib/prefs/labelPage.js:176
 msgid "Prefix"
 msgstr "Präfix"
 
-#: src/prefsModules/labelPage.js:176
+#: src/lib/prefs/labelPage.js:176
 msgid "Suffix"
 msgstr "Suffix"
 
-#: src/prefsModules/mainPage.js:39
+#: src/lib/prefs/mainPage.js:39
 msgid "Layout"
 msgstr "Anordnung"
 
-#: src/prefsModules/mainPage.js:43
+#: src/lib/prefs/mainPage.js:43
 msgid "Horizontal"
 msgstr "Horizontal"
 
-#: src/prefsModules/mainPage.js:45
+#: src/lib/prefs/mainPage.js:45
 msgid "Left"
 msgstr "Links"
 
-#: src/prefsModules/mainPage.js:45
+#: src/lib/prefs/mainPage.js:45
 msgid "Right"
 msgstr "Rechts"
 
-#: src/prefsModules/mainPage.js:49
+#: src/lib/prefs/mainPage.js:49
 msgid "Vertical"
 msgstr "Vertikal"
 
-#: src/prefsModules/mainPage.js:51
+#: src/lib/prefs/mainPage.js:51
 msgid "Bottom"
 msgstr "Unten"
 
-#: src/prefsModules/mainPage.js:51
+#: src/lib/prefs/mainPage.js:51
 msgid "Top"
 msgstr "Oben"
 
-#: src/prefsModules/mainPage.js:72
+#: src/lib/prefs/mainPage.js:72
 msgid "Language"
 msgstr "Sprache"
 
-#: src/prefsModules/mainPage.js:78
+#: src/lib/prefs/mainPage.js:78
 msgid "System"
 msgstr "System"
 
-#: src/prefsModules/mainPage.js:80
+#: src/lib/prefs/mainPage.js:80
 msgid ""
 "Use your time format language. Some characters may appear in a different "
 "font."
@@ -198,11 +198,11 @@ msgstr ""
 "Die Sprache Ihres Zeitformats verwenden. Einige Zeichen werden "
 "möglicherweise in einer anderen Schriftart angezeigt."
 
-#: src/prefsModules/mainPage.js:84
+#: src/lib/prefs/mainPage.js:84
 msgid "Auto"
 msgstr "Auto"
 
-#: src/prefsModules/mainPage.js:86
+#: src/lib/prefs/mainPage.js:86
 msgid ""
 "Use your time format language, falling back to English if the font does not "
 "support it."
@@ -210,45 +210,45 @@ msgstr ""
 "Die Sprache Ihres Zeitformats verwenden und auf Englisch zurückgreifen, wenn "
 "die Schriftart sie nicht unterstützt."
 
-#: src/prefsModules/mainPage.js:90
+#: src/lib/prefs/mainPage.js:90
 msgid "English"
 msgstr "Englisch"
 
-#: src/prefsModules/mainPage.js:91
+#: src/lib/prefs/mainPage.js:91
 msgid "Use English."
 msgstr "Englisch verwenden."
 
-#: src/prefsModules/mainPage.js:115
+#: src/lib/prefs/mainPage.js:115
 msgid "Mode"
 msgstr "Modus"
 
-#: src/prefsModules/mainPage.js:128
+#: src/lib/prefs/mainPage.js:128
 msgctxt "preferences group title"
 msgid "Reset"
 msgstr "Zurücksetzen"
 
-#: src/prefsModules/mainPage.js:133
+#: src/lib/prefs/mainPage.js:133
 msgid "All Settings"
 msgstr "Alle Einstellungen"
 
-#: src/prefsModules/mainPage.js:134
+#: src/lib/prefs/mainPage.js:134
 msgid "Restore every setting to its default value"
 msgstr "Alle Einstellungen auf ihre Standardwerte zurücksetzen"
 
-#: src/prefsModules/mainPage.js:137 src/prefsModules/mainPage.js:150
+#: src/lib/prefs/mainPage.js:137 src/lib/prefs/mainPage.js:150
 msgid "Reset"
 msgstr "Zurücksetzen"
 
-#: src/prefsModules/mainPage.js:146
+#: src/lib/prefs/mainPage.js:146
 msgid "Reset All Settings?"
 msgstr "Alle Einstellungen zurücksetzen?"
 
-#: src/prefsModules/mainPage.js:147
+#: src/lib/prefs/mainPage.js:147
 msgid "Every setting of Modern Clock will be restored to its default value."
 msgstr ""
 "Alle Einstellungen von Modern Clock werden auf ihre Standardwerte "
 "zurückgesetzt."
 
-#: src/prefsModules/mainPage.js:169
+#: src/lib/prefs/mainPage.js:169
 msgid "Information"
 msgstr "Informationen"
