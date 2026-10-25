@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 import Adw from 'gi://Adw';
+import Gdk from 'gi://Gdk';
 import GLib from 'gi://GLib';
 import Gtk from 'gi://Gtk';
 
@@ -32,6 +33,14 @@ export function createAboutRow(metadata) {
         const build = metadata.version ? ` (${metadata.version})` : '';
         const gtkVersion = `${Gtk.get_major_version()}.${Gtk.get_minor_version()}.${Gtk.get_micro_version()}`;
         const adwVersion = `${Adw.get_major_version()}.${Adw.get_minor_version()}.${Adw.get_micro_version()}`;
+        // Physical resolution and scale per monitor; get_scale() (fractional) needs GTK 4.14
+        const monitors = [...Gdk.Display.get_default().get_monitors()];
+        const monitorLines = monitors.map(monitor => {
+            const scale = monitor.get_scale?.() ?? monitor.get_scale_factor();
+            const { width, height } = monitor.get_geometry();
+            const size = `${Math.round(width * scale)}×${Math.round(height * scale)}`;
+            return `\n  - ${monitor.get_connector() ?? 'Unknown'}: ${size} @ ${+scale.toFixed(2)}`;
+        });
         const sessionType = GLib.getenv('XDG_SESSION_TYPE') ?? 'Unknown';
         const system = GLib.get_os_info('NAME') ?? 'Unknown';
         const systemVersion =
@@ -45,6 +54,7 @@ export function createAboutRow(metadata) {
 - GTK version: ${gtkVersion}
 - Libadwaita version: ${adwVersion}
 
+- Monitors: ${monitors.length}${monitorLines.join('')}
 - Session type: ${sessionType}
 - System: ${system} ${systemVersion}`.trim();
     };
