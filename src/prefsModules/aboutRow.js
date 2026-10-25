@@ -73,11 +73,14 @@ export function createAboutRow(metadata) {
             // with <li> list items.
             release_notes: '',
             support_url: '',
-            // Translators: To be credited in the "About" dialog, put your name(s) here, optionally
-            // followed by an <email> or a URL. One translator per line.
-            translator_credits: _('translator_credits'),
             version,
         });
+        // Instead of `translator_credits`, which only shows the translators of the current language
+        aboutWindow.add_credit_section(_('Translators'), [
+            'Djinn Alexio (French) https://github.com/djinnalexio',
+            'Adrian Seidel (German) https://github.com/FasteryXD',
+            'Tony Rain (Russian) https://github.com/Tony-Rain',
+        ]);
         // A link instead of the `website` property, which libadwaita labels "Website"
         aboutWindow.add_link('GitHub', metadata.url);
         aboutWindow.add_link(
