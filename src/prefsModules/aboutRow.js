@@ -77,8 +77,9 @@ export function createAboutRow(metadata) {
             // followed by an <email> or a URL. One translator per line.
             translator_credits: _('translator_credits'),
             version,
-            website: metadata.url,
         });
+        // A link instead of the `website` property, which libadwaita labels "Website"
+        aboutWindow.add_link('GitHub', metadata.url);
         aboutWindow.add_link(
             _('Extension Page'),
             'https://extensions.gnome.org/extension/9882/modern-clock/'
