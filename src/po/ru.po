@@ -64,134 +64,134 @@ msgstr "24-часовой"
 msgid "12-hour"
 msgstr "12-часовой"
 
-#: src/prefsModules/aboutRow.js:43
+#: src/lib/prefs/aboutRow.js:43
 msgid "About Modern Clock"
 msgstr "О Modern Clock"
 
 #. Translators: To be credited in the "About" dialog, put your
 #. name(s) here, optionally followed by an <email> or a URL.
 #. One translator per line.
-#: src/prefsModules/aboutRow.js:70
+#: src/lib/prefs/aboutRow.js:70
 msgid "translator_credits"
 msgstr "Tony-Rain https://github.com/Tony-Rain"
 
-#: src/prefsModules/aboutRow.js:74
+#: src/lib/prefs/aboutRow.js:74
 msgid "Extension Page"
 msgstr "Страница расширения"
 
-#: src/prefsModules/aboutRow.js:75
+#: src/lib/prefs/aboutRow.js:75
 msgid "Based on"
 msgstr "Основано на"
 
-#: src/prefsModules/aboutRow.js:78
+#: src/lib/prefs/aboutRow.js:78
 msgid "Fonts"
 msgstr "Шрифты"
 
-#: src/prefsModules/colorButton.js:104 src/prefsModules/labelPage.js:149
+#: src/lib/prefs/colorButton.js:104 src/lib/prefs/labelPage.js:149
 msgid "Color"
 msgstr "Цвет"
 
-#: src/prefsModules/colorButton.js:106 src/prefsModules/mainPage.js:186
+#: src/lib/prefs/colorButton.js:106 src/lib/prefs/mainPage.js:186
 msgid "Cancel"
 msgstr "Отмена"
 
-#: src/prefsModules/colorButton.js:109
+#: src/lib/prefs/colorButton.js:109
 msgid "Select"
 msgstr "Выбрать"
 
-#: src/prefsModules/labelPage.js:45
+#: src/lib/prefs/labelPage.js:45
 msgid "Appearance"
 msgstr "Внешний вид"
 
-#: src/prefsModules/labelPage.js:49
+#: src/lib/prefs/labelPage.js:49
 msgid "Show"
 msgstr "Показывать"
 
-#: src/prefsModules/labelPage.js:55
+#: src/lib/prefs/labelPage.js:55
 msgid "Font"
 msgstr "Шрифт"
 
-#: src/prefsModules/labelPage.js:64
+#: src/lib/prefs/labelPage.js:64
 msgid "Reset to default"
 msgstr "Сбросить"
 
-#: src/prefsModules/labelPage.js:132
+#: src/lib/prefs/labelPage.js:132
 msgid "Size"
 msgstr "Размер"
 
-#: src/prefsModules/labelPage.js:134
+#: src/lib/prefs/labelPage.js:134
 msgid "Large"
 msgstr "Крупный"
 
-#: src/prefsModules/labelPage.js:134
+#: src/lib/prefs/labelPage.js:134
 msgid "Small"
 msgstr "Мелкий"
 
-#: src/prefsModules/labelPage.js:141
+#: src/lib/prefs/labelPage.js:141
 msgid "Letter Spacing"
 msgstr "Межсимвольный интервал"
 
-#: src/prefsModules/labelPage.js:143
+#: src/lib/prefs/labelPage.js:143
 msgid "Narrow"
 msgstr "Узкий"
 
-#: src/prefsModules/labelPage.js:143
+#: src/lib/prefs/labelPage.js:143
 msgid "Wide"
 msgstr "Широкий"
 
-#: src/prefsModules/labelPage.js:154
+#: src/lib/prefs/labelPage.js:154
 msgid "Use custom color"
 msgstr "Использовать свой цвет"
 
-#: src/prefsModules/labelPage.js:168
+#: src/lib/prefs/labelPage.js:168
 msgid "Decoration"
 msgstr "Обрамление"
 
-#: src/prefsModules/labelPage.js:173
+#: src/lib/prefs/labelPage.js:173
 msgid "Prefix"
 msgstr "Префикс"
 
-#: src/prefsModules/labelPage.js:173
+#: src/lib/prefs/labelPage.js:173
 msgid "Suffix"
 msgstr "Суффикс"
 
-#: src/prefsModules/mainPage.js:38
+#: src/lib/prefs/mainPage.js:38
 msgid "Layout"
 msgstr "Расположение"
 
-#: src/prefsModules/mainPage.js:42
+#: src/lib/prefs/mainPage.js:42
 msgid "Horizontal"
 msgstr "По горизонтали"
 
-#: src/prefsModules/mainPage.js:44
+#: src/lib/prefs/mainPage.js:44
 msgid "Left"
 msgstr "Слева"
 
-#: src/prefsModules/mainPage.js:44
+#: src/lib/prefs/mainPage.js:44
 msgid "Right"
 msgstr "Справа"
 
-#: src/prefsModules/mainPage.js:48
+#: src/lib/prefs/mainPage.js:48
 msgid "Vertical"
 msgstr "По вертикали"
 
-#: src/prefsModules/mainPage.js:50
+#: src/lib/prefs/mainPage.js:50
 msgid "Bottom"
 msgstr "Снизу"
 
-#: src/prefsModules/mainPage.js:50
+#: src/lib/prefs/mainPage.js:50
 msgid "Top"
 msgstr "Сверху"
 
-#: src/prefsModules/mainPage.js:71
+#: src/lib/prefs/mainPage.js:71
 msgid "Language"
 msgstr "Язык"
 
-#: src/prefsModules/mainPage.js:77
+#: src/lib/prefs/mainPage.js:77
 msgid "System"
 msgstr "Системный"
 
-#: src/prefsModules/mainPage.js:79
+#: src/lib/prefs/mainPage.js:79
 msgid ""
 "Use your time format language. Some characters may appear in a different "
 "font."
@@ -199,11 +199,11 @@ msgstr ""
 "Использовать язык формата времени. Некоторые символы могут отображаться "
 "другим шрифтом."
 
-#: src/prefsModules/mainPage.js:83
+#: src/lib/prefs/mainPage.js:83
 msgid "Auto"
 msgstr "Авто"
 
-#: src/prefsModules/mainPage.js:85
+#: src/lib/prefs/mainPage.js:85
 msgid ""
 "Use your time format language, falling back to English if the font does not "
 "support it."
@@ -211,43 +211,43 @@ msgstr ""
 "Использовать язык формата времени или английский, если шрифт его не "
 "поддерживает."
 
-#: src/prefsModules/mainPage.js:89
+#: src/lib/prefs/mainPage.js:89
 msgid "English"
 msgstr "Английский"
 
-#: src/prefsModules/mainPage.js:90
+#: src/lib/prefs/mainPage.js:90
 msgid "Use English."
 msgstr "Использовать английский."
 
-#: src/prefsModules/mainPage.js:115 src/prefsModules/mainPage.js:140
+#: src/lib/prefs/mainPage.js:115 src/lib/prefs/mainPage.js:140
 msgid "Mode"
 msgstr "Режим"
 
-#: src/prefsModules/mainPage.js:165
+#: src/lib/prefs/mainPage.js:165
 msgctxt "preferences group title"
 msgid "Reset"
 msgstr "Сброс"
 
-#: src/prefsModules/mainPage.js:170
+#: src/lib/prefs/mainPage.js:170
 msgid "All Settings"
 msgstr "Все настройки"
 
-#: src/prefsModules/mainPage.js:171
+#: src/lib/prefs/mainPage.js:171
 msgid "Restore every setting to its default value"
 msgstr "Вернуть всем настройкам значения по умолчанию"
 
-#: src/prefsModules/mainPage.js:174 src/prefsModules/mainPage.js:187
+#: src/lib/prefs/mainPage.js:174 src/lib/prefs/mainPage.js:187
 msgid "Reset"
 msgstr "Сбросить"
 
-#: src/prefsModules/mainPage.js:183
+#: src/lib/prefs/mainPage.js:183
 msgid "Reset All Settings?"
 msgstr "Сбросить все настройки?"
 
-#: src/prefsModules/mainPage.js:184
+#: src/lib/prefs/mainPage.js:184
 msgid "Every setting of Modern Clock will be restored to its default value."
 msgstr "Все настройки Modern Clock вернутся к значениям по умолчанию."
 
-#: src/prefsModules/mainPage.js:206
+#: src/lib/prefs/mainPage.js:206
 msgid "Information"
 msgstr "Информация"

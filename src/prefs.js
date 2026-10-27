@@ -12,11 +12,15 @@ import {
     gettext as _,
 } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
-import { createEnumRow } from './prefsModules/enumRow.js';
-import { createLabelPage } from './prefsModules/labelPage.js';
-import { createMainPage } from './prefsModules/mainPage.js';
-import { connectSetting, disconnectSettings } from './prefsModules/settingsHandlers.js';
-import { getMonthFontSupport, registerBundledFonts, toTimeLocaleUpperCase } from './lib/utils.js';
+import { createEnumRow } from './lib/prefs/enumRow.js';
+import { createLabelPage } from './lib/prefs/labelPage.js';
+import { createMainPage } from './lib/prefs/mainPage.js';
+import { connectSetting, disconnectSettings } from './lib/prefs/settingsHandlers.js';
+import {
+    getMonthFontSupport,
+    registerBundledFonts,
+    toTimeLocaleUpperCase,
+} from './lib/shared/utils.js';
 
 export default class ModernClockPreferences extends ExtensionPreferences {
     fillPreferencesWindow(window) {
