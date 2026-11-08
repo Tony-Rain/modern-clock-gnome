@@ -1,0 +1,247 @@
+# Brazilian Portuguese translations for Modern Clock for GNOME.
+# Copyright (C) 2026 Modern Clock for GNOME Contributors
+# This file is distributed under the same license as the Modern Clock for GNOME package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Modern Clock for GNOME 3.1\n"
+"Report-Msgid-Bugs-To: https://github.com/Tony-Rain/modern-clock-gnome/"
+"issues/\n"
+"POT-Creation-Date: 2026-10-25 11:26-0400\n"
+"PO-Revision-Date: 2026-11-07 20:39-0400\n"
+"Last-Translator: Codex (OpenAI)\n"
+"Language-Team: Brazilian Portuguese\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: src/extension.js:694
+msgid "Modern Clock Fonts Installed"
+msgstr "Fontes do Modern Clock instaladas"
+
+#: src/extension.js:695
+msgid "Log out and back in for the new fonts to take effect."
+msgstr "Encerre a sessão e entre novamente para ativar as novas fontes."
+
+#: src/lib/prefs/aboutRow.js:25
+msgid "About Modern Clock"
+msgstr "Sobre o Modern Clock"
+
+#: src/lib/prefs/aboutRow.js:89
+msgid "Translators"
+msgstr "Tradutores"
+
+#: src/lib/prefs/aboutRow.js:97
+msgid "Extension Page"
+msgstr "Página da extensão"
+
+#: src/lib/prefs/aboutRow.js:100
+msgid "Based on"
+msgstr "Baseado em"
+
+#: src/lib/prefs/aboutRow.js:103
+msgid "Fonts"
+msgstr "Fontes"
+
+#: src/lib/prefs/colorButton.js:106 src/lib/prefs/labelPage.js:152
+msgid "Color"
+msgstr "Cor"
+
+#: src/lib/prefs/colorButton.js:108 src/lib/prefs/mainPage.js:149
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: src/lib/prefs/colorButton.js:111
+msgid "Select"
+msgstr "Selecionar"
+
+#: src/lib/prefs/labelPage.js:46
+msgid "Appearance"
+msgstr "Aparência"
+
+#: src/lib/prefs/labelPage.js:50
+msgid "Show"
+msgstr "Exibir"
+
+#: src/lib/prefs/labelPage.js:56
+msgid "Font"
+msgstr "Fonte"
+
+#: src/lib/prefs/labelPage.js:65
+msgid "Reset to default"
+msgstr "Restaurar padrão"
+
+#: src/lib/prefs/labelPage.js:135
+msgid "Size"
+msgstr "Tamanho"
+
+#: src/lib/prefs/labelPage.js:137
+msgid "Large"
+msgstr "Grande"
+
+#: src/lib/prefs/labelPage.js:137
+msgid "Small"
+msgstr "Pequeno"
+
+#: src/lib/prefs/labelPage.js:144
+msgid "Letter Spacing"
+msgstr "Espaçamento entre letras"
+
+#: src/lib/prefs/labelPage.js:146
+msgid "Narrow"
+msgstr "Menor"
+
+#: src/lib/prefs/labelPage.js:146
+msgid "Wide"
+msgstr "Maior"
+
+#: src/lib/prefs/labelPage.js:157
+msgid "Use custom color"
+msgstr "Usar cor personalizada"
+
+#: src/lib/prefs/labelPage.js:171
+msgid "Decoration"
+msgstr "Decoração"
+
+#: src/lib/prefs/labelPage.js:176
+msgid "Prefix"
+msgstr "Prefixo"
+
+#: src/lib/prefs/labelPage.js:176
+msgid "Suffix"
+msgstr "Sufixo"
+
+#: src/lib/prefs/mainPage.js:39
+msgid "Layout"
+msgstr "Posição"
+
+#: src/lib/prefs/mainPage.js:43
+msgid "Horizontal"
+msgstr "Horizontal"
+
+#: src/lib/prefs/mainPage.js:45
+msgid "Left"
+msgstr "Esquerda"
+
+#: src/lib/prefs/mainPage.js:45
+msgid "Right"
+msgstr "Direita"
+
+#: src/lib/prefs/mainPage.js:49
+msgid "Vertical"
+msgstr "Vertical"
+
+#: src/lib/prefs/mainPage.js:51
+msgid "Bottom"
+msgstr "Embaixo"
+
+#: src/lib/prefs/mainPage.js:51
+msgid "Top"
+msgstr "Em cima"
+
+#: src/lib/prefs/mainPage.js:72
+msgid "Language"
+msgstr "Idioma"
+
+#: src/lib/prefs/mainPage.js:78
+msgid "System"
+msgstr "Sistema"
+
+#: src/lib/prefs/mainPage.js:80
+msgid ""
+"Use your time format language. Some characters may appear in a different "
+"font."
+msgstr ""
+"Usa o idioma definido para os formatos de data e hora. Alguns caracteres "
+"podem aparecer em outra fonte."
+
+#: src/lib/prefs/mainPage.js:84
+msgid "Auto"
+msgstr "Automático"
+
+#: src/lib/prefs/mainPage.js:86
+msgid ""
+"Use your time format language, falling back to English if the font does not "
+"support it."
+msgstr ""
+"Usa o idioma definido para os formatos de data e hora. Se a fonte não tiver "
+"os caracteres necessários, usa o inglês."
+
+#: src/lib/prefs/mainPage.js:90
+msgid "English"
+msgstr "Inglês"
+
+#: src/lib/prefs/mainPage.js:91
+msgid "Use English."
+msgstr "Usa o inglês."
+
+#: src/lib/prefs/mainPage.js:115
+msgid "Mode"
+msgstr "Modo"
+
+#: src/lib/prefs/mainPage.js:128
+msgctxt "preferences group title"
+msgid "Reset"
+msgstr "Restauração"
+
+#: src/lib/prefs/mainPage.js:133
+msgid "All Settings"
+msgstr "Todas as configurações"
+
+#: src/lib/prefs/mainPage.js:134
+msgid "Restore every setting to its default value"
+msgstr "Restaurar os valores padrão de todas as configurações"
+
+#: src/lib/prefs/mainPage.js:137 src/lib/prefs/mainPage.js:150
+msgid "Reset"
+msgstr "Restaurar"
+
+#: src/lib/prefs/mainPage.js:146
+msgid "Reset All Settings?"
+msgstr "Restaurar todas as configurações?"
+
+#: src/lib/prefs/mainPage.js:147
+msgid "Every setting of Modern Clock will be restored to its default value."
+msgstr "Todas as configurações do Modern Clock voltarão aos valores padrão."
+
+#: src/lib/prefs/mainPage.js:169
+msgid "Information"
+msgstr "Informações"
+
+#: src/prefs.js:62
+msgid "General"
+msgstr "Geral"
+
+#: src/prefs.js:70
+msgid "Weekday"
+msgstr "Dia da semana"
+
+#: src/prefs.js:76
+msgid "Date"
+msgstr "Data"
+
+#: src/prefs.js:81
+msgid "Time"
+msgstr "Hora"
+
+#: src/prefs.js:93 src/prefs.js:105 src/prefs.js:152
+msgid "Format"
+msgstr "Formato"
+
+#: src/prefs.js:95
+msgid "Abbreviated"
+msgstr "Abreviado"
+
+#: src/prefs.js:95
+msgid "Full"
+msgstr "Completo"
+
+#: src/prefs.js:154
+msgid "12-hour"
+msgstr "12 horas"
+
+#: src/prefs.js:154
+msgid "24-hour"
+msgstr "24 horas"
