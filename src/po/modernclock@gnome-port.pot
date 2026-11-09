@@ -6,9 +6,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Modern Clock for GNOME\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-12 01:50+0300\n"
+"Project-Id-Version: Modern Clock for GNOME 3.1\n"
+"Report-Msgid-Bugs-To: https://github.com/Tony-Rain/modern-clock-gnome/"
+"issues/\n"
+"POT-Creation-Date: 2026-11-09 12:19+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,231 +18,227 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/extension.js:627
+#: src/extension.js:694
 msgid "Modern Clock Fonts Installed"
 msgstr ""
 
-#: src/extension.js:628
+#: src/extension.js:695
 msgid "Log out and back in for the new fonts to take effect."
 msgstr ""
 
-#: src/prefs.js:41
-msgid "General"
-msgstr ""
-
-#: src/prefs.js:49
-msgid "Weekday"
-msgstr ""
-
-#: src/prefs.js:55
-msgid "Date"
-msgstr ""
-
-#: src/prefs.js:60
-msgid "Time"
-msgstr ""
-
-#: src/prefs.js:74 src/prefs.js:91 src/prefs.js:114 src/prefs.js:160
-#: src/prefs.js:175
-msgid "Format"
-msgstr ""
-
-#: src/prefs.js:80 src/prefs.js:92
-msgid "Full"
-msgstr ""
-
-#: src/prefs.js:82 src/prefs.js:92
-msgid "Abbreviated"
-msgstr ""
-
-#: src/prefs.js:166 src/prefs.js:176
-msgid "24-hour"
-msgstr ""
-
-#: src/prefs.js:167 src/prefs.js:176
-msgid "12-hour"
-msgstr ""
-
-#: src/lib/prefs/aboutRow.js:43
+#: src/lib/prefs/aboutRow.js:25
 msgid "About Modern Clock"
 msgstr ""
 
-#. Translators: To be credited in the "About" dialog, put your
-#. name(s) here, optionally followed by an <email> or a URL.
-#. One translator per line.
-#: src/lib/prefs/aboutRow.js:70
-msgid "translator_credits"
+#: src/lib/prefs/aboutRow.js:89
+msgid "Translators"
 msgstr ""
 
-#: src/lib/prefs/aboutRow.js:74
+#: src/lib/prefs/aboutRow.js:97
 msgid "Extension Page"
 msgstr ""
 
-#: src/lib/prefs/aboutRow.js:75
+#: src/lib/prefs/aboutRow.js:100
 msgid "Based on"
 msgstr ""
 
-#: src/lib/prefs/aboutRow.js:78
+#: src/lib/prefs/aboutRow.js:103
 msgid "Fonts"
 msgstr ""
 
-#: src/lib/prefs/colorButton.js:104 src/lib/prefs/labelPage.js:149
+#: src/lib/prefs/colorButton.js:106 src/lib/prefs/labelPage.js:152
 msgid "Color"
 msgstr ""
 
-#: src/lib/prefs/colorButton.js:106 src/lib/prefs/mainPage.js:186
+#: src/lib/prefs/colorButton.js:108 src/lib/prefs/mainPage.js:149
 msgid "Cancel"
 msgstr ""
 
-#: src/lib/prefs/colorButton.js:109
+#: src/lib/prefs/colorButton.js:111
 msgid "Select"
 msgstr ""
 
-#: src/lib/prefs/labelPage.js:45
+#: src/lib/prefs/labelPage.js:46
 msgid "Appearance"
 msgstr ""
 
-#: src/lib/prefs/labelPage.js:49
+#: src/lib/prefs/labelPage.js:50
 msgid "Show"
 msgstr ""
 
-#: src/lib/prefs/labelPage.js:55
+#: src/lib/prefs/labelPage.js:56
 msgid "Font"
 msgstr ""
 
-#: src/lib/prefs/labelPage.js:64
+#: src/lib/prefs/labelPage.js:65
 msgid "Reset to default"
 msgstr ""
 
-#: src/lib/prefs/labelPage.js:132
+#: src/lib/prefs/labelPage.js:135
 msgid "Size"
 msgstr ""
 
-#: src/lib/prefs/labelPage.js:134
+#: src/lib/prefs/labelPage.js:137
 msgid "Large"
 msgstr ""
 
-#: src/lib/prefs/labelPage.js:134
+#: src/lib/prefs/labelPage.js:137
 msgid "Small"
 msgstr ""
 
-#: src/lib/prefs/labelPage.js:141
+#: src/lib/prefs/labelPage.js:144
 msgid "Letter Spacing"
 msgstr ""
 
-#: src/lib/prefs/labelPage.js:143
+#: src/lib/prefs/labelPage.js:146
 msgid "Narrow"
 msgstr ""
 
-#: src/lib/prefs/labelPage.js:143
+#: src/lib/prefs/labelPage.js:146
 msgid "Wide"
 msgstr ""
 
-#: src/lib/prefs/labelPage.js:154
+#: src/lib/prefs/labelPage.js:157
 msgid "Use custom color"
 msgstr ""
 
-#: src/lib/prefs/labelPage.js:168
+#: src/lib/prefs/labelPage.js:171
 msgid "Decoration"
 msgstr ""
 
-#: src/lib/prefs/labelPage.js:173
+#: src/lib/prefs/labelPage.js:176
 msgid "Prefix"
 msgstr ""
 
-#: src/lib/prefs/labelPage.js:173
+#: src/lib/prefs/labelPage.js:176
 msgid "Suffix"
 msgstr ""
 
-#: src/lib/prefs/mainPage.js:38
+#: src/lib/prefs/mainPage.js:39
 msgid "Layout"
 msgstr ""
 
-#: src/lib/prefs/mainPage.js:42
+#: src/lib/prefs/mainPage.js:43
 msgid "Horizontal"
 msgstr ""
 
-#: src/lib/prefs/mainPage.js:44
+#: src/lib/prefs/mainPage.js:45
 msgid "Left"
 msgstr ""
 
-#: src/lib/prefs/mainPage.js:44
+#: src/lib/prefs/mainPage.js:45
 msgid "Right"
 msgstr ""
 
-#: src/lib/prefs/mainPage.js:48
+#: src/lib/prefs/mainPage.js:49
 msgid "Vertical"
 msgstr ""
 
-#: src/lib/prefs/mainPage.js:50
+#: src/lib/prefs/mainPage.js:51
 msgid "Bottom"
 msgstr ""
 
-#: src/lib/prefs/mainPage.js:50
+#: src/lib/prefs/mainPage.js:51
 msgid "Top"
 msgstr ""
 
-#: src/lib/prefs/mainPage.js:71
+#: src/lib/prefs/mainPage.js:72
 msgid "Language"
 msgstr ""
 
-#: src/lib/prefs/mainPage.js:77
+#: src/lib/prefs/mainPage.js:78
 msgid "System"
 msgstr ""
 
-#: src/lib/prefs/mainPage.js:79
+#: src/lib/prefs/mainPage.js:80
 msgid ""
 "Use your time format language. Some characters may appear in a different "
 "font."
 msgstr ""
 
-#: src/lib/prefs/mainPage.js:83
+#: src/lib/prefs/mainPage.js:84
 msgid "Auto"
 msgstr ""
 
-#: src/lib/prefs/mainPage.js:85
+#: src/lib/prefs/mainPage.js:86
 msgid ""
 "Use your time format language, falling back to English if the font does not "
 "support it."
 msgstr ""
 
-#: src/lib/prefs/mainPage.js:89
+#: src/lib/prefs/mainPage.js:90
 msgid "English"
 msgstr ""
 
-#: src/lib/prefs/mainPage.js:90
+#: src/lib/prefs/mainPage.js:91
 msgid "Use English."
 msgstr ""
 
-#: src/lib/prefs/mainPage.js:115 src/lib/prefs/mainPage.js:140
+#: src/lib/prefs/mainPage.js:115
 msgid "Mode"
 msgstr ""
 
-#: src/lib/prefs/mainPage.js:165
+#: src/lib/prefs/mainPage.js:128
 msgctxt "preferences group title"
 msgid "Reset"
 msgstr ""
 
-#: src/lib/prefs/mainPage.js:170
+#: src/lib/prefs/mainPage.js:133
 msgid "All Settings"
 msgstr ""
 
-#: src/lib/prefs/mainPage.js:171
+#: src/lib/prefs/mainPage.js:134
 msgid "Restore every setting to its default value"
 msgstr ""
 
-#: src/lib/prefs/mainPage.js:174 src/lib/prefs/mainPage.js:187
+#: src/lib/prefs/mainPage.js:137 src/lib/prefs/mainPage.js:150
 msgid "Reset"
 msgstr ""
 
-#: src/lib/prefs/mainPage.js:183
+#: src/lib/prefs/mainPage.js:146
 msgid "Reset All Settings?"
 msgstr ""
 
-#: src/lib/prefs/mainPage.js:184
+#: src/lib/prefs/mainPage.js:147
 msgid "Every setting of Modern Clock will be restored to its default value."
 msgstr ""
 
-#: src/lib/prefs/mainPage.js:206
+#: src/lib/prefs/mainPage.js:169
 msgid "Information"
+msgstr ""
+
+#: src/prefs.js:62
+msgid "General"
+msgstr ""
+
+#: src/prefs.js:70
+msgid "Weekday"
+msgstr ""
+
+#: src/prefs.js:76
+msgid "Date"
+msgstr ""
+
+#: src/prefs.js:81
+msgid "Time"
+msgstr ""
+
+#: src/prefs.js:93 src/prefs.js:105 src/prefs.js:152
+msgid "Format"
+msgstr ""
+
+#: src/prefs.js:95
+msgid "Abbreviated"
+msgstr ""
+
+#: src/prefs.js:95
+msgid "Full"
+msgstr ""
+
+#: src/prefs.js:154
+msgid "12-hour"
+msgstr ""
+
+#: src/prefs.js:154
+msgid "24-hour"
 msgstr ""
