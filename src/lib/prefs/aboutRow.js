@@ -87,6 +87,7 @@ export function createAboutRow(metadata) {
         });
         // Instead of `translator_credits`, which only shows the translators of the current language
         aboutWindow.add_credit_section(_('Translators'), [
+            'Fábio Wesen (Brazilian Portuguese) https://github.com/Fwesen',
             'Djinn Alexio (French) https://github.com/djinnalexio',
             'Adrian Seidel (German) https://github.com/FasteryXD',
             'Tony Rain (Russian) https://github.com/Tony-Rain',
