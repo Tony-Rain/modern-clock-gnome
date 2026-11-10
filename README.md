@@ -124,7 +124,7 @@ The bundled fonts are covered by their own licenses and are not part of the GPL-
 
 - Original: [Modern Clock for KDE][modern-clock-kde] by Prayag2
 - Fonts: [Anurati][anurati], [Poppins][poppins]
-- Translations: French by [djinnalexio][djinnalexio], German by [FasteryXD][fasteryxd]
+- Translations: Brazilian Portuguese by [Fábio Wesen][fwesen], French by [djinnalexio][djinnalexio], German by [FasteryXD][fasteryxd], Russian by [Tony Rain][tony-rain]
 
 [badge-readme-en]: https://img.shields.io/badge/Language-English-3584e4
 [badge-readme-fr]: https://img.shields.io/badge/Langue-Fran%C3%A7ais-9141ac
@@ -147,3 +147,5 @@ The bundled fonts are covered by their own licenses and are not part of the GPL-
 [poppins]: https://github.com/itfoundry/poppins
 [djinnalexio]: https://github.com/djinnalexio
 [fasteryxd]: https://github.com/FasteryXD
+[fwesen]: https://github.com/Fwesen
+[tony-rain]: https://github.com/Tony-Rain
